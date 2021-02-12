@@ -3,7 +3,7 @@ sudo: required
 language: java
 
 services:
-  - docker
+- docker
 
 after_success:
-  - docker-compose up --abort-on-container-exit
+- docker-compose up --abort-on-container-exit
