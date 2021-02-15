@@ -174,8 +174,4 @@ public class App
             return null;
         }
     }
-    /**
-     * Prints a list of employees.
-     * @param employees The list of employees to print.
-     */
 }
