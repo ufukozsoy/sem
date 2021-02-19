@@ -1,5 +1,9 @@
 package com.napier.sem;
 
+import com.napier.sem.models.Employee;
+import com.napier.sem.queries.coursework_queries;
+import com.napier.sem.queries.lab_queries;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -8,30 +12,37 @@ public class App
     public static void main(String[] args)
     {
         // Create new Application
-        App a = new App();
 
-        // Connect to database
-        a.connect();
-
+        //LABS --- --- ---
+        App app = new App();
+        // Connect to labs 'employees' database
+        Connection labs_conn = app.connect("employees");
         // Extract employee salary information
-        ArrayList<Employee> employees = a.getAllSalaries();
+        ArrayList<Employee> employeesList = lab_queries.getAllSalaries(labs_conn);
+        // Print salaries
+        lab_queries.printSalaries(employeesList);
+        // Disconnect from database
+        app.disconnect(labs_conn);
+        labs_conn = null;
 
-        a.printSalaries(employees);
+        //COURSEWORK --- --- ---
 
+        // Connect to coursework 'world' database
+        Connection coursew_conn = app.connect("world");
+
+        coursework_queries.getAllCityReports(coursew_conn);
 
         // Disconnect from database
-        a.disconnect();
+        app.disconnect(coursew_conn);
+        coursew_conn = null;
     }
-    /**
-     * Connection to MySQL database.
-     */
-    private Connection con = null;
-
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public static Connection connect(String databaseName)
     {
+        Connection con = null;
+
         try
         {
             // Load Database driver
@@ -52,7 +63,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/" + databaseName + "?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -66,12 +77,13 @@ public class App
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+        return con;
     }
 
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
+    public static void disconnect(Connection con)
     {
         if (con != null)
         {
@@ -87,109 +99,5 @@ public class App
         }
     }
 
-    public Employee getEmployee(int ID)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT emp_no, first_name, last_name "
-                            + "FROM employees "
-                            + "WHERE emp_no = " + ID;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Employee emp = new Employee();
-                emp.emp_no = rset.getInt("emp_no");
-                emp.first_name = rset.getString("first_name");
-                emp.last_name = rset.getString("last_name");
-                return emp;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get employee details");
-            return null;
-        }
-    }
 
-    public void displayEmployee(Employee emp)
-    {
-        if (emp != null)
-        {
-            System.out.println(
-                    emp.emp_no + " "
-                            + emp.first_name + " "
-                            + emp.last_name + "\n"
-                            + emp.title + "\n"
-                            + "Salary:" + emp.salary + "\n"
-                            + emp.dept_name + "\n"
-                            + "Manager: " + emp.manager + "\n");
-        }
-    }
-
-    /**
-     * Gets all the current employees and salaries.
-     * @return A list of all employees and salaries, or null if there is an error.
-     */
-    public ArrayList<Employee> getAllSalaries()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary "
-                            + "FROM employees, salaries "
-                            + "WHERE employees.emp_no = salaries.emp_no AND salaries.to_date = '9999-01-01' "
-                            + "ORDER BY employees.emp_no ASC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Employee> employees = new ArrayList<Employee>();
-            while (rset.next())
-            {
-                Employee emp = new Employee();
-                emp.emp_no = rset.getInt("employees.emp_no");
-                emp.first_name = rset.getString("employees.first_name");
-                emp.last_name = rset.getString("employees.last_name");
-                emp.salary = rset.getInt("salaries.salary");
-                employees.add(emp);
-            }
-            return employees;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get salary details");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a list of employees.
-     * @param employees The list of employees to print.
-     */
-    public void printSalaries(ArrayList<Employee> employees)
-    {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
-        // Loop over all employees in the list
-        for (Employee emp : employees)
-        {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s %-8s",
-                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
-            System.out.println(emp_string);
-        }
-    }
 }
