@@ -1,4 +1,4 @@
-package com.napier.sem.models;
+package com.napier.sem.models.reports;
 
 public class CityReport extends BaseReport {
     public String country;

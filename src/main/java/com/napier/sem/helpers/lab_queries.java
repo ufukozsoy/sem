@@ -1,4 +1,4 @@
-package com.napier.sem.queries;
+package com.napier.sem.helpers;
 
 import com.napier.sem.models.Employee;
 

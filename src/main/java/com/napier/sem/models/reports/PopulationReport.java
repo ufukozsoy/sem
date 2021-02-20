@@ -1,4 +1,4 @@
-package com.napier.sem.models;
+package com.napier.sem.models.reports;
 
 public class PopulationReport extends BaseReport {
     public int population;

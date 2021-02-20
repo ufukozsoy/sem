@@ -1,40 +1,42 @@
 package com.napier.sem;
 
-import com.napier.sem.models.Employee;
-import com.napier.sem.queries.coursework_queries;
-import com.napier.sem.queries.lab_queries;
+import com.napier.sem.models.raw_data.City;
+import com.napier.sem.helpers.DatabaseHelper;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class App
 {
     public static void main(String[] args)
     {
+        System.out.println("Application started... (v.0.1.1)");
+
         // Create new Application
-
-        //LABS --- --- ---
         App app = new App();
-        // Connect to labs 'employees' database
-        Connection labs_conn = app.connect("employees");
-        // Extract employee salary information
-        ArrayList<Employee> employeesList = lab_queries.getAllSalaries(labs_conn);
-        // Print salaries
-        lab_queries.printSalaries(employeesList);
-        // Disconnect from database
-        app.disconnect(labs_conn);
-        labs_conn = null;
-
-        //COURSEWORK --- --- ---
-
         // Connect to coursework 'world' database
-        Connection coursew_conn = app.connect("world");
+        Connection conn = app.connect("world");
 
-        coursework_queries.getAllCityReports(coursew_conn);
+        System.out.println("Running test query...");
+
+        // Create string for SQL statement
+        String testQuery =
+                "SELECT name, countrycode, district, population "
+                        + "FROM city";
+
+        // Query Cities
+        List<City> citiesList = DatabaseHelper.runCityQuery(conn, testQuery);
+
+        System.out.println("Test query finished...");
+
+        // Print n reports as test
+        DatabaseHelper.printCity(citiesList, 5);
 
         // Disconnect from database
-        app.disconnect(coursew_conn);
-        coursew_conn = null;
+        app.disconnect(conn);
+        conn = null;
+
+        System.out.println("Application finished...");
     }
     /**
      * Connect to the MySQL database.
