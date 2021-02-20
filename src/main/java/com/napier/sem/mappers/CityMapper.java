@@ -1,6 +1,5 @@
 package com.napier.sem.mappers;
 import com.napier.sem.models.raw_data.City;
-import com.napier.sem.models.reports.CityReport;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,36 +1,66 @@
 package com.napier.sem;
 
-import com.napier.sem.models.raw_data.City;
 import com.napier.sem.helpers.DatabaseHelper;
+import com.napier.sem.helpers.QueryHelper;
+import com.napier.sem.mappers.CountryMapper;
+import com.napier.sem.models.raw_data.Country;
+import com.napier.sem.models.raw_data.Query;
+import com.napier.sem.models.reports.CountryReportRow;
+import com.napier.sem.models.reports.Report;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class App
 {
     public static void main(String[] args)
     {
-        System.out.println("Application started... (v.0.1.1)");
+        System.out.println("Application started... (build#: 2021-02-20T23:19)");
 
         // Create new Application
         App app = new App();
         // Connect to coursework 'world' database
         Connection conn = app.connect("world");
 
-        System.out.println("Running test query...");
+        List<Report> countryReportList = new ArrayList<Report>();
+        List<Report> cityReportList = new ArrayList<Report>();
+        List<Report> capitalCityReportList = new ArrayList<Report>();
+        List<Report> populationReportList = new ArrayList<Report>();
 
-        // Create string for SQL statement
-        String testQuery =
-                "SELECT name, countrycode, district, population "
-                        + "FROM city";
+        System.out.println("Loading country queries...");
 
-        // Query Cities
-        List<City> citiesList = DatabaseHelper.runCityQuery(conn, testQuery);
+        QueryHelper queryHelper = new QueryHelper();
 
-        System.out.println("Test query finished...");
+        for (Query selectQuery : queryHelper.CountryReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
 
-        // Print n reports as test
-        DatabaseHelper.printCity(citiesList, 5);
+            try {
+                List<CountryReportRow> countryReportRowList = CountryMapper.GenerateCountryReportRowsFromResultSet(queryResult);
+
+                Report newReport = new Report();
+
+                newReport.title = selectQuery.title;
+                newReport.rows = countryReportRowList;
+
+                System.out.println("TEST PRINT START...");
+                System.out.println(newReport.title);
+                System.out.println("TEST PRINT END...");
+
+                countryReportList.add(newReport);
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Queries finished...");
+        }
+
+        System.out.println("Queries finished...");
+        System.out.println(countryReportList.stream().count() + " reports collected...");
+
+        System.out.println("(PLACEHOLDER) Generating CSV reports...");
 
         // Disconnect from database
         app.disconnect(conn);

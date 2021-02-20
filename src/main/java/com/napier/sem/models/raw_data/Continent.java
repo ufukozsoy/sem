@@ -14,4 +14,13 @@ public enum Continent {
     private Continent(String label) {
         this.label = label;
     }
+
+    public static Continent fromString(String text) {
+        for (Continent b : Continent.values()) {
+            if (b.label.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }
