@@ -22,7 +22,7 @@ public class CountryReportRowMapper {
             countryReportRow.continent = Continent.fromString(rs.getString("Continent"));
             countryReportRow.region = rs.getString("Region");
             countryReportRow.population = rs.getInt("Population");
-            countryReportRow.capital = rs.getInt("Capital");
+            countryReportRow.capital = rs.getString("Capital");
 
             objectList.add(countryReportRow);
         }

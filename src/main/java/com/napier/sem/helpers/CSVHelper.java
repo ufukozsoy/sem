@@ -28,13 +28,13 @@ public class CSVHelper {
                 directory.mkdirs();
             }
 
+            System.out.println("Saving report to: " + filePath);
+
             FileWriter csvWriter = new FileWriter(filePath);
 
             // Print header
-            for (String columnName : report.columns) {
-                csvWriter.append(columnName);
-                csvWriter.append(",");
-            }
+            csvWriter.append(String.join(",", report.columns));
+            csvWriter.append("\n");
 
             switch (report.reportType)
             {

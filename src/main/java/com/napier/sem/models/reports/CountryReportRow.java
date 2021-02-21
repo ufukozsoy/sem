@@ -8,5 +8,5 @@ public class CountryReportRow {
     public Continent continent;
     public String region;
     public int population;
-    public int capital;
+    public String capital;
 }

@@ -10,6 +10,8 @@ import com.napier.sem.models.raw_data.Query;
 import com.napier.sem.models.reports.*;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class App
 {
     public static void main(String[] args)
     {
-        System.out.println("Application started... (build#: 2021-02-21T11:25)");
+        System.out.println("Application started... (build#: (" + getCurrentTimeStamp() + ")");
 
         // Create new Application
         App app = new App();
@@ -123,8 +125,8 @@ public class App
         System.out.println("Generating Country CSV reports...");
         CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
         System.out.println("Generating City CSV reports...");
-        CSVHelper.WriteReportListToCSV(cityReportList, "citry_reports");
-        System.out.println("Generating Capital Citry CSV reports...");
+        CSVHelper.WriteReportListToCSV(cityReportList, "city_reports");
+        System.out.println("Generating Capital City CSV reports...");
         CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
         System.out.println("Generating Population CSV reports...");
         CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
@@ -133,7 +135,8 @@ public class App
         app.disconnect(conn);
         conn = null;
 
-        System.out.println("Application finished...");
+        System.out.println("Reports saved to 'C:/Users/Public/output_reports'");
+        System.out.println("Application closing...");
     }
     /**
      * Connect to the MySQL database.
@@ -198,5 +201,10 @@ public class App
         }
     }
 
-
+    public static String getCurrentTimeStamp() {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        java.util.Date now = new java.util.Date();
+        String strDate = sdfDate.format(now);
+        return strDate;
+    }
 }
