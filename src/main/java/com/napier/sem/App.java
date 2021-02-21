@@ -1,37 +1,150 @@
 package com.napier.sem;
 
+import com.napier.sem.helpers.CSVHelper;
+import com.napier.sem.helpers.DatabaseHelper;
+import com.napier.sem.helpers.QueryHelper;
+import com.napier.sem.mappers.raw_data.CountryMapper;
+import com.napier.sem.mappers.reports.*;
+import com.napier.sem.models.enums.ReportType;
+import com.napier.sem.models.raw_data.Query;
+import com.napier.sem.models.reports.*;
+
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class App
 {
     public static void main(String[] args)
     {
+        System.out.println("Application started... (build#: (" + getCurrentTimeStamp() + ")");
+
         // Create new Application
-        App a = new App();
+        App app = new App();
+        // Connect to coursework 'world' database
+        Connection conn = app.connect("world");
 
-        // Connect to database
-        a.connect();
+        List<Report> countryReportList = new ArrayList<Report>();
+        List<Report> cityReportList = new ArrayList<Report>();
+        List<Report> capitalCityReportList = new ArrayList<Report>();
+        List<Report> populationReportList = new ArrayList<Report>();
 
-        // Extract employee salary information
-        ArrayList<Employee> employees = a.getAllSalaries();
+        QueryHelper queryHelper = new QueryHelper();
 
-        a.printSalaries(employees);
+        // Generate Country reports --- --- ---
+        System.out.println("Loading country report queries...");
 
+        for (Query selectQuery : queryHelper.CountryReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<CountryReportRow> countryReportRowList = CountryReportRowMapper.GenerateCountryReportRowsFromResultSet(queryResult);
+                countryReportList.add(new Report(selectQuery.title, countryReportRowList, queryHeaders, ReportType.Country));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("Country report queries finished...");
+
+        // Generate Country reports --- --- ---
+        System.out.println("Loading city report queries...");
+
+        for (Query selectQuery : queryHelper.CityReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<CityReportRow> cityReportRowList = CityReportRowMapper.GenerateCityFromResultSet(queryResult);
+                cityReportList.add(new Report(selectQuery.title, cityReportRowList, queryHeaders, ReportType.City));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("City report queries finished...");
+
+        // Generate Country reports --- --- ---
+        System.out.println("Loading capital city report queries...");
+
+        for (Query selectQuery : queryHelper.CapitalCityReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<CapitalCityReportRow> capitalCityReportRowList = CapitalCityReportRowMapper.GenerateCapitalCityFromResultSet(queryResult);
+                capitalCityReportList.add(new Report(selectQuery.title, capitalCityReportRowList, queryHeaders, ReportType.CapitalCity));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("Capital city report queries finished...");
+
+        // Generate Country reports --- --- ---
+        System.out.println("Loading population report queries...");
+
+        for (Query selectQuery : queryHelper.PopulationReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<PopulationReportRow> populationReportRowList = PopulationReportRowMapper.GeneratePopulationReportFromResultSet(queryResult);
+                populationReportList.add(new Report(selectQuery.title, populationReportRowList, queryHeaders, ReportType.Population));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("Population report queries finished...");
+
+        System.out.println(countryReportList.stream().count() + " country reports collected...");
+        System.out.println(cityReportList.stream().count() + " city reports collected...");
+        System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
+        System.out.println(populationReportList.stream().count() + " population reports collected...");
+
+        System.out.println("Generating Country CSV reports...");
+        CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
+        System.out.println("Generating City CSV reports...");
+        CSVHelper.WriteReportListToCSV(cityReportList, "city_reports");
+        System.out.println("Generating Capital City CSV reports...");
+        CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
+        System.out.println("Generating Population CSV reports...");
+        CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
 
         // Disconnect from database
-        a.disconnect();
-    }
-    /**
-     * Connection to MySQL database.
-     */
-    private Connection con = null;
+        app.disconnect(conn);
+        conn = null;
 
+        System.out.println("Reports saved to 'C:/Users/Public/output_reports'");
+        System.out.println("Application closing...");
+    }
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public static Connection connect(String databaseName)
     {
+        Connection con = null;
+
         try
         {
             // Load Database driver
@@ -52,7 +165,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/" + databaseName + "?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -66,12 +179,13 @@ public class App
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+        return con;
     }
 
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
+    public static void disconnect(Connection con)
     {
         if (con != null)
         {
@@ -87,109 +201,10 @@ public class App
         }
     }
 
-    public Employee getEmployee(int ID)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT emp_no, first_name, last_name "
-                            + "FROM employees "
-                            + "WHERE emp_no = " + ID;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Employee emp = new Employee();
-                emp.emp_no = rset.getInt("emp_no");
-                emp.first_name = rset.getString("first_name");
-                emp.last_name = rset.getString("last_name");
-                return emp;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get employee details");
-            return null;
-        }
-    }
-
-    public void displayEmployee(Employee emp)
-    {
-        if (emp != null)
-        {
-            System.out.println(
-                    emp.emp_no + " "
-                            + emp.first_name + " "
-                            + emp.last_name + "\n"
-                            + emp.title + "\n"
-                            + "Salary:" + emp.salary + "\n"
-                            + emp.dept_name + "\n"
-                            + "Manager: " + emp.manager + "\n");
-        }
-    }
-
-    /**
-     * Gets all the current employees and salaries.
-     * @return A list of all employees and salaries, or null if there is an error.
-     */
-    public ArrayList<Employee> getAllSalaries()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary "
-                            + "FROM employees, salaries "
-                            + "WHERE employees.emp_no = salaries.emp_no AND salaries.to_date = '9999-01-01' "
-                            + "ORDER BY employees.emp_no ASC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Employee> employees = new ArrayList<Employee>();
-            while (rset.next())
-            {
-                Employee emp = new Employee();
-                emp.emp_no = rset.getInt("employees.emp_no");
-                emp.first_name = rset.getString("employees.first_name");
-                emp.last_name = rset.getString("employees.last_name");
-                emp.salary = rset.getInt("salaries.salary");
-                employees.add(emp);
-            }
-            return employees;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get salary details");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a list of employees.
-     * @param employees The list of employees to print.
-     */
-    public void printSalaries(ArrayList<Employee> employees)
-    {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
-        // Loop over all employees in the list
-        for (Employee emp : employees)
-        {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s %-8s",
-                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
-            System.out.println(emp_string);
-        }
+    public static String getCurrentTimeStamp() {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        java.util.Date now = new java.util.Date();
+        String strDate = sdfDate.format(now);
+        return strDate;
     }
 }

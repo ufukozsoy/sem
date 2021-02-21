@@ -3,11 +3,12 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
-
+    volumes:
+      - /c/Users/Public/output_reports:/tmp/output_reports
   # db is is db folder
   db:
     build: db/.
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=""
     restart: always
     ports:
       - "33060:3306"
