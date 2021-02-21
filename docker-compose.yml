@@ -3,7 +3,8 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
-
+    volumes:
+      - /c/Users/Public/output_reports:/tmp/output_reports
   # db is is db folder
   db:
     build: db/.
