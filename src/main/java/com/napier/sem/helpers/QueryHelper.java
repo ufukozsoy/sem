@@ -1,13 +1,7 @@
 package com.napier.sem.helpers;
 
-import com.napier.sem.mappers.CityMapper;
-import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.Query;
 
-import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.*;
 
 public class QueryHelper {
@@ -20,24 +14,24 @@ public class QueryHelper {
     public QueryHelper()
     {
         CountryReports = new ArrayList<Query>(Arrays.asList(
-            new Query("SELECT * FROM country ORDER BY population DESC;",
+            new Query("SELECT name,code,continent,region,population,capital FROM country ORDER BY population DESC;",
                     "All the countries in the world organised by largest population to smallest."),
 
-            new Query("SELECT * FROM country WHERE continent = 'Europe' ORDER BY population DESC;",
+            new Query("SELECT name,code,continent,region,population,capital FROM country WHERE continent = 'Europe' ORDER BY population DESC;",
                     "All the countries in a continent organised by largest population to smallest."),
 
-            new Query("SELECT * FROM country WHERE region = 'Eastern Europe' ORDER BY population DESC;",
+            new Query("SELECT name,code,continent,region,population,capital FROM country WHERE region = 'Eastern Europe' ORDER BY population DESC;",
                     "All the countries in a region organised by largest population to smallest."),
 
             // --- --- ---
 
-            new Query("SELECT * FROM country ORDER BY population DESC LIMIT 5;",
+            new Query("SELECT name,code,continent,region,population,capital FROM country ORDER BY population DESC LIMIT 5;",
                     "The top N populated countries in the world where N is provided by the user."),
 
-            new Query("SELECT * FROM country WHERE continent = 'Europe' ORDER BY population DESC LIMIT 5;",
+            new Query("SELECT name,code,continent,region,population,capital FROM country WHERE continent = 'Europe' ORDER BY population DESC LIMIT 5;",
                     "The top N populated countries in a continent where N is provided by the user."),
 
-            new Query("SELECT * FROM country WHERE region = 'Eastern Europe' ORDER BY population DESC LIMIT 5;",
+            new Query("SELECT name,code,continent,region,population,capital FROM country WHERE region = 'Eastern Europe' ORDER BY population DESC LIMIT 5;",
                     "The top N populated countries in a region where N is provided by the user.")
         ));
 
@@ -99,13 +93,22 @@ public class QueryHelper {
         ));
 
         PopulationReports = new ArrayList<Query>(Arrays.asList(
-                new Query("SELECT CO.continent, SUM(distinct CO.Population) AS total_pop, CONCAT(ROUND((SUM(distinct CI.Population) / SUM(distinct CO.population) * 100),2),'%') AS city_pop, CONCAT(100 - ROUND((SUM(distinct CI.Population) / SUM(distinct CO.Population) * 100),2),'%') AS rural_pop FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Continent ORDER By SUM(CO.Population) DESC;",
-                        "The population of people, people living in cities, and people not living in cities in each continent."),
+//                new Query("SELECT CO.continent as name, SUM(distinct CO.Population) AS total_pop, CONCAT(ROUND((SUM(distinct CI.Population) / SUM(distinct CO.population) * 100),2),'%') AS urban_pop_percentage, CONCAT(100 - ROUND((SUM(distinct CI.Population) / SUM(distinct CO.Population) * 100),2),'%') AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Continent ORDER By SUM(CO.Population) DESC;",
+//                        "The population of people, people living in cities, and people not living in cities in each continent."),
+//
+//                new Query("SELECT CO.region as name, SUM(distinct CO.Population) AS total_pop, CONCAT(ROUND((SUM(distinct CI.Population) / SUM(distinct CO.population) * 100),2),'%') AS urban_pop_percentage, CONCAT(100 - ROUND((SUM(distinct CI.Population) / SUM(distinct CO.Population) * 100),2),'%') AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Region ORDER By SUM(CO.Population) DESC;",
+//                        "The population of people, people living in cities, and people not living in cities in each region."),
+//
+//                new Query("SELECT CO.name as name, SUM(distinct CO.Population) AS total_pop, CONCAT(ROUND((SUM(distinct CI.Population) / SUM(distinct CO.population) * 100),2),'%') AS urban_pop_percentage, CONCAT(100 - ROUND((SUM(distinct CI.Population) / SUM(distinct CO.Population) * 100),2),'%') AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Code ORDER By SUM(CO.Population) DESC;",
+//                        "The population of people, people living in cities, and people not living in cities in each country.")
 
-                new Query("SELECT CO.region, SUM(distinct CO.Population) AS total_pop, CONCAT(ROUND((SUM(distinct CI.Population) / SUM(distinct CO.population) * 100),2),'%') AS city_pop, CONCAT(100 - ROUND((SUM(distinct CI.Population) / SUM(distinct CO.Population) * 100),2),'%') AS rural_pop FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Region ORDER By SUM(CO.Population) DESC;",
+                new Query("SELECT CO.continent as name, SUM(distinct CO.Population) AS total_pop, SUM(distinct CI.Population) / SUM(distinct CO.population) AS urban_pop_percentage, 1 - SUM(distinct CI.Population) / SUM(distinct CO.Population) AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Continent ORDER By SUM(CO.Population) DESC;",
+                "The population of people, people living in cities, and people not living in cities in each continent."),
+
+                new Query("SELECT CO.region as name, SUM(distinct CO.Population) AS total_pop, SUM(distinct CI.Population) / SUM(distinct CO.population) AS urban_pop_percentage, 1 - SUM(distinct CI.Population) / SUM(distinct CO.Population) AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Region ORDER By SUM(CO.Population) DESC;",
                         "The population of people, people living in cities, and people not living in cities in each region."),
 
-                new Query("SELECT CO.name, SUM(distinct CO.Population) AS total_pop, CONCAT(ROUND((SUM(distinct CI.Population) / SUM(distinct CO.population) * 100),2),'%') AS city_pop, CONCAT(100 - ROUND((SUM(distinct CI.Population) / SUM(distinct CO.Population) * 100),2),'%') AS rural_pop FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Code ORDER By SUM(CO.Population) DESC;",
+                new Query("SELECT CO.name as name, SUM(distinct CO.Population) AS total_pop, SUM(distinct CI.Population) / SUM(distinct CO.population) AS urban_pop_percentage, 1- SUM(distinct CI.Population) / SUM(distinct CO.Population) AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Code ORDER By SUM(CO.Population) DESC;",
                         "The population of people, people living in cities, and people not living in cities in each country.")
         ));
     }

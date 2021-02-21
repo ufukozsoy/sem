@@ -1,4 +1,4 @@
-package com.napier.sem.mappers;
+package com.napier.sem.mappers.raw_data;
 import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
@@ -35,25 +35,6 @@ public class CountryMapper {
             country.code2 = rs.getString("Code2");
 
             objectList.add(country);
-        }
-        return objectList;
-    }
-
-    public static List<CountryReportRow> GenerateCountryReportRowsFromResultSet(ResultSet rs) throws SQLException {
-        List<CountryReportRow> objectList = new ArrayList<CountryReportRow>();
-
-        while(rs.next()) {
-
-            CountryReportRow countryReportRow = new CountryReportRow();
-
-            countryReportRow.name = rs.getString("Name");
-            countryReportRow.code = rs.getString("Code");
-            countryReportRow.continent = Continent.fromString(rs.getString("Continent"));
-            countryReportRow.region = rs.getString("Region");
-            countryReportRow.population = rs.getInt("Population");
-            countryReportRow.capital = rs.getInt("Capital");
-
-            objectList.add(countryReportRow);
         }
         return objectList;
     }

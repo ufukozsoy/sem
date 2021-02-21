@@ -1,6 +1,6 @@
 package com.napier.sem.models.reports;
 
-public class PopulationReport {
+public class PopulationReportRow {
     public String name;
     public int population;
     public double urban_pop_percentage;

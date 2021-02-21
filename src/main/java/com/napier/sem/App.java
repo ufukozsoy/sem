@@ -1,12 +1,13 @@
 package com.napier.sem;
 
+import com.napier.sem.helpers.CSVHelper;
 import com.napier.sem.helpers.DatabaseHelper;
 import com.napier.sem.helpers.QueryHelper;
-import com.napier.sem.mappers.CountryMapper;
-import com.napier.sem.models.raw_data.Country;
+import com.napier.sem.mappers.raw_data.CountryMapper;
+import com.napier.sem.mappers.reports.*;
+import com.napier.sem.models.enums.ReportType;
 import com.napier.sem.models.raw_data.Query;
-import com.napier.sem.models.reports.CountryReportRow;
-import com.napier.sem.models.reports.Report;
+import com.napier.sem.models.reports.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class App
 {
     public static void main(String[] args)
     {
-        System.out.println("Application started... (build#: 2021-02-20T23:19)");
+        System.out.println("Application started... (build#: 2021-02-21T10:43)");
 
         // Create new Application
         App app = new App();
@@ -28,39 +29,105 @@ public class App
         List<Report> capitalCityReportList = new ArrayList<Report>();
         List<Report> populationReportList = new ArrayList<Report>();
 
-        System.out.println("Loading country queries...");
-
         QueryHelper queryHelper = new QueryHelper();
+
+        // Generate Country reports --- --- ---
+        System.out.println("Loading country report queries...");
 
         for (Query selectQuery : queryHelper.CountryReports) {
             System.out.println("Running query: " + selectQuery.query);
             ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
 
             try {
-                List<CountryReportRow> countryReportRowList = CountryMapper.GenerateCountryReportRowsFromResultSet(queryResult);
-
-                Report newReport = new Report();
-
-                newReport.title = selectQuery.title;
-                newReport.rows = countryReportRowList;
-
-                System.out.println("TEST PRINT START...");
-                System.out.println(newReport.title);
-                System.out.println("TEST PRINT END...");
-
-                countryReportList.add(newReport);
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<CountryReportRow> countryReportRowList = CountryReportRowMapper.GenerateCountryReportRowsFromResultSet(queryResult);
+                countryReportList.add(new Report(selectQuery.title, countryReportRowList, queryHeaders, ReportType.Country));
             }
             catch (Exception ex)
             {
                 System.out.println(ex);
             }
-            System.out.println("Queries finished...");
+            System.out.println("Query finished: " + selectQuery.query);
         }
 
-        System.out.println("Queries finished...");
-        System.out.println(countryReportList.stream().count() + " reports collected...");
+        System.out.println("Country report queries finished...");
 
-        System.out.println("(PLACEHOLDER) Generating CSV reports...");
+        // Generate Country reports --- --- ---
+        System.out.println("Loading city report queries...");
+
+        for (Query selectQuery : queryHelper.CityReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<CityReportRow> cityReportRowList = CityReportRowMapper.GenerateCityFromResultSet(queryResult);
+                cityReportList.add(new Report(selectQuery.title, cityReportRowList, queryHeaders, ReportType.City));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("City report queries finished...");
+
+        // Generate Country reports --- --- ---
+        System.out.println("Loading capital city report queries...");
+
+        for (Query selectQuery : queryHelper.CapitalCityReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<CapitalCityReportRow> capitalCityReportRowList = CapitalCityReportRowMapper.GenerateCapitalCityFromResultSet(queryResult);
+                capitalCityReportList.add(new Report(selectQuery.title, capitalCityReportRowList, queryHeaders, ReportType.CapitalCity));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("Capital city report queries finished...");
+
+        // Generate Country reports --- --- ---
+        System.out.println("Loading population report queries...");
+
+        for (Query selectQuery : queryHelper.PopulationReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<PopulationReportRow> populationReportRowList = PopulationReportRowMapper.GeneratePopulationReportFromResultSet(queryResult);
+                populationReportList.add(new Report(selectQuery.title, populationReportRowList, queryHeaders, ReportType.Population));
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+
+        System.out.println("Population report queries finished...");
+
+        System.out.println(countryReportList.stream().count() + " country reports collected...");
+        System.out.println(cityReportList.stream().count() + " city reports collected...");
+        System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
+        System.out.println(populationReportList.stream().count() + " population reports collected...");
+
+        System.out.println("Generating Country CSV reports...");
+        CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
+        System.out.println("Generating City CSV reports...");
+        CSVHelper.WriteReportListToCSV(cityReportList, "citry_reports");
+        System.out.println("Generating Capital Citry CSV reports...");
+        CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
+        System.out.println("Generating Population CSV reports...");
+        CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
 
         // Disconnect from database
         app.disconnect(conn);

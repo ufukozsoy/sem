@@ -1,4 +1,4 @@
-package com.napier.sem.mappers;
+package com.napier.sem.mappers.raw_data;
 import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.CountryLanguage;
 
