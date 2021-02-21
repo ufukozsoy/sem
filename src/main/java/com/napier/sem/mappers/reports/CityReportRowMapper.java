@@ -14,14 +14,21 @@ public class CityReportRowMapper {
 
         while(rs.next()) {
 
-            CityReportRow cityReportRow = new CityReportRow();
+            try
+            {
+                CityReportRow cityReportRow = new CityReportRow();
 
-            cityReportRow.name = rs.getString("Name");
-            cityReportRow.country = rs.getString("Country");
-            cityReportRow.district = rs.getString("District");
-            cityReportRow.population = rs.getInt("Population");
+                cityReportRow.name = rs.getString("Name");
+                cityReportRow.country = rs.getString("Country");
+                cityReportRow.district = rs.getString("District");
+                cityReportRow.population = rs.getInt("Population");
 
-            objectList.add(cityReportRow);
+                objectList.add(cityReportRow);
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
         }
         return objectList;
     }

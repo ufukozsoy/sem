@@ -14,14 +14,21 @@ public class PopulationReportRowMapper {
 
         while(rs.next()) {
 
-            PopulationReportRow populationReportRow = new PopulationReportRow();
+            try
+            {
+                PopulationReportRow populationReportRow = new PopulationReportRow();
 
-            populationReportRow.name = rs.getString("Name");
-            populationReportRow.population = rs.getInt("total_pop");
-            populationReportRow.urban_pop_percentage = rs.getDouble("urban_pop_percentage");
-            populationReportRow.rural_pop_percentage = rs.getDouble("rural_pop_percentage");
+                populationReportRow.name = rs.getString("Name");
+                populationReportRow.population = rs.getInt("total_pop");
+                populationReportRow.urban_pop_percentage = rs.getDouble("urban_pop_percentage");
+                populationReportRow.rural_pop_percentage = rs.getDouble("rural_pop_percentage");
 
-            objectList.add(populationReportRow);
+                objectList.add(populationReportRow);
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
         }
         return objectList;
     }

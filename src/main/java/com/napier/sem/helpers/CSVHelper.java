@@ -51,7 +51,7 @@ public class CSVHelper {
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", countryReportRow.population));
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%d", countryReportRow.capital));
+                        csvWriter.append(countryReportRow.capital);
                         csvWriter.append("\n");
                     }
                     break;
@@ -82,13 +82,16 @@ public class CSVHelper {
 
                 case Population:
                     for (PopulationReportRow populationReportRow : (List<PopulationReportRow>)report.rows) {
+
+                        System.out.println("Writing row to CSV: " + populationReportRow.name);
+
                         csvWriter.append(populationReportRow.name);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", populationReportRow.population));
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%d", populationReportRow.urban_pop_percentage));
+                        csvWriter.append(String.format("%.2f", populationReportRow.urban_pop_percentage));
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%d", populationReportRow.rural_pop_percentage));
+                        csvWriter.append(String.format("%.2f", populationReportRow.rural_pop_percentage));
                         csvWriter.append("\n");
                     }
                     break;

@@ -15,16 +15,23 @@ public class CountryReportRowMapper {
 
         while(rs.next()) {
 
-            CountryReportRow countryReportRow = new CountryReportRow();
+            try
+            {
+                CountryReportRow countryReportRow = new CountryReportRow();
 
-            countryReportRow.name = rs.getString("Name");
-            countryReportRow.code = rs.getString("Code");
-            countryReportRow.continent = Continent.fromString(rs.getString("Continent"));
-            countryReportRow.region = rs.getString("Region");
-            countryReportRow.population = rs.getInt("Population");
-            countryReportRow.capital = rs.getString("Capital");
+                countryReportRow.name = rs.getString("Name");
+                countryReportRow.code = rs.getString("Code");
+                countryReportRow.continent = Continent.fromString(rs.getString("Continent"));
+                countryReportRow.region = rs.getString("Region");
+                countryReportRow.population = rs.getInt("Population");
+                countryReportRow.capital = rs.getString("Capital");
 
-            objectList.add(countryReportRow);
+                objectList.add(countryReportRow);
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
         }
         return objectList;
     }

@@ -14,13 +14,20 @@ public class CapitalCityReportRowMapper {
 
         while(rs.next()) {
 
-            CapitalCityReportRow capitalCityReportRow = new CapitalCityReportRow();
+            try
+            {
+                CapitalCityReportRow capitalCityReportRow = new CapitalCityReportRow();
 
-            capitalCityReportRow.name = rs.getString("Name");
-            capitalCityReportRow.country = rs.getString("Country");
-            capitalCityReportRow.population = rs.getInt("Population");
+                capitalCityReportRow.name = rs.getString("Name");
+                capitalCityReportRow.country = rs.getString("Country");
+                capitalCityReportRow.population = rs.getInt("Population");
 
-            objectList.add(capitalCityReportRow);
+                objectList.add(capitalCityReportRow);
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
         }
         return objectList;
     }
