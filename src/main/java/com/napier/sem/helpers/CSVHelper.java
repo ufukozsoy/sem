@@ -95,6 +95,23 @@ public class CSVHelper {
                         csvWriter.append("\n");
                     }
                     break;
+            //code by viva                    
+                case Language:
+                	for (LanguageReportRow languageReportRow : (List<LanguageReportRow>)report.rows) {
+
+                        System.out.println("Writing row to CSV: " + languageReportRow.language);
+
+                        //csvWriter.append(languageReportRow.language);
+                        //csvWriter.append(",");
+                        csvWriter.append(languageReportRow.language);
+                        csvWriter.append(",");
+                        csvWriter.append(String.format("%.2f", languageReportRow.speakers));
+                        csvWriter.append(",");
+                        csvWriter.append(String.format("%.2f", languageReportRow.percentage_of_world_population));
+                        csvWriter.append("\n");
+            }
+                	break;
+                    
             }
 
             csvWriter.flush();
