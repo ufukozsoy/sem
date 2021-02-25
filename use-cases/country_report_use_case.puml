@@ -1,0 +1,16 @@
+@startuml
+
+actor User as "User"
+rectangle Database
+
+rectangle "Demographic Reporting System" {
+    usecase UC4 as "Get countries by region/continent"
+
+    usecase UCa as "Generate CSV reports"
+
+    User - UC4
+    UC4 ..> UCa : generate
+    UC4 - Database
+}
+
+@enduml

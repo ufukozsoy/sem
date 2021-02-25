@@ -4,6 +4,9 @@ services:
   app:
     build: .
     volumes:
+      #MAC
+      #- /Users/bzatrok/Downloads/output_reports:/tmp/output_reports
+      #Windows
       - /c/Users/Public/output_reports:/tmp/output_reports
   # db is is db folder
   db:
