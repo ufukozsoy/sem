@@ -1,5 +1,3 @@
-// code by viva
-
 package com.napier.sem.mappers.reports;
 
 import java.sql.ResultSet;

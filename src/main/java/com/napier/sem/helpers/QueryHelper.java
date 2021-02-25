@@ -103,8 +103,8 @@ public class QueryHelper {
                 new Query("SELECT CO.name as name, SUM(distinct CO.Population) AS total_pop, (SUM(distinct CI.Population) / SUM(distinct CO.population)) AS urban_pop_percentage, (1- SUM(distinct CI.Population) / SUM(distinct CO.Population)) AS rural_pop_percentage FROM country CO LEFT JOIN city CI ON CO.code = CI.countrycode GROUP BY CO.Code ORDER By SUM(CO.Population) DESC;",
                         "The population of people, people living in cities, and people not living in cities in each country.")
         ));
-		//code by viva
-        LanguageReports=new ArrayList<Query>(Arrays.asList(
+		
+        LanguageReports = new ArrayList<Query>(Arrays.asList(
         		new Query("select cl.Language,sum((cl.Percentage/100)*(co.Population)) as speakers,(select sum((cl.Percentage)*(co.Population))/sum(Population) from country) as per_world_population   from countrylanguage cl\n"
         				+ "left join country co\n"
         				+ "on co.code=cl.CountryCode\n"

@@ -117,7 +117,7 @@ public class App
         }
 
         System.out.println("Population report queries finished...");
-        //code by viva
+        
         System.out.println("Language population report queries...");
         
         for (Query selectQuery : queryHelper.LanguageReports) {
@@ -127,8 +127,7 @@ public class App
             try {
                 List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
                 List<LanguageReportRow> languageReportRowList = LanguageReportRowMapper.GenerateLanguageReportFromResultSet(queryResult);
-                languageReportList.add(new Report(selectQuery.title, languageReportRowList, queryHeaders, ReportType.Language));
-                
+                languageReportList.add(new Report(selectQuery.title, languageReportRowList, queryHeaders, ReportType.Language));          
             }
             catch (Exception ex)
             {
@@ -143,7 +142,7 @@ public class App
         System.out.println(cityReportList.stream().count() + " city reports collected...");
         System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
         System.out.println(populationReportList.stream().count() + " population reports collected...");
-        //code by viva
+        
 		System.out.println(languageReportList.stream().count() + " language reports collected...");
 
         System.out.println("Generating Country CSV reports...");
@@ -154,7 +153,7 @@ public class App
         CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
         System.out.println("Generating Population CSV reports...");
         CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
-       //code by viva
+       
 	    System.out.println("Generating Language CSV reports...");
         CSVHelper.WriteReportListToCSV(languageReportList, "language_reports");
         // Disconnect from database
