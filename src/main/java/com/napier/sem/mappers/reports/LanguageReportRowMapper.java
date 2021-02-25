@@ -15,12 +15,11 @@ public class LanguageReportRowMapper {
 
         while(rs.next()) {
 
-            try
-            {
-            	LanguageReportRow languageReportRow = new LanguageReportRow();
-                languageReportRow.language = rs.getString("Language");
-                languageReportRow.speakers = rs.getDouble("speakers");
-                languageReportRow.percentage_of_world_population = rs.getDouble("per_world_population");
+			try {
+				LanguageReportRow languageReportRow = new LanguageReportRow();
+				languageReportRow.language = rs.getString("Language");
+				languageReportRow.speakers = Math.round(rs.getDouble("speakers"));
+				languageReportRow.percentage_of_world_population = rs.getDouble("per_world_population");
 
                 objectList.add(languageReportRow);
             }

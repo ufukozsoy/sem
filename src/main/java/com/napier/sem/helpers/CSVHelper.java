@@ -103,7 +103,7 @@ public class CSVHelper {
 						                       
                         csvWriter.append(languageReportRow.language);
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%.2f", languageReportRow.speakers));
+                        csvWriter.append(String.format("%d", languageReportRow.speakers));
                         csvWriter.append(",");
                         csvWriter.append(String.format("%.2f", languageReportRow.percentage_of_world_population));
                         csvWriter.append("\n");
