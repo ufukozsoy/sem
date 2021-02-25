@@ -30,6 +30,7 @@ public class App
         List<Report> cityReportList = new ArrayList<Report>();
         List<Report> capitalCityReportList = new ArrayList<Report>();
         List<Report> populationReportList = new ArrayList<Report>();
+        List<Report> languageReportList = new ArrayList<Report>(); //code by viva
 
         QueryHelper queryHelper = new QueryHelper();
 
@@ -116,11 +117,33 @@ public class App
         }
 
         System.out.println("Population report queries finished...");
+        
+        System.out.println("Language population report queries...");
+        
+        for (Query selectQuery : queryHelper.LanguageReports) {
+            System.out.println("Running query: " + selectQuery.query);
+            ResultSet queryResult = DatabaseHelper.RunSelectQuery(conn, selectQuery.query);
+
+            try {
+                List<String> queryHeaders = QueryHeaderMapper.GenerateHeadersFromResultSet(queryResult);
+                List<LanguageReportRow> languageReportRowList = LanguageReportRowMapper.GenerateLanguageReportFromResultSet(queryResult);
+                languageReportList.add(new Report(selectQuery.title, languageReportRowList, queryHeaders, ReportType.Language));          
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex);
+            }
+            System.out.println("Query finished: " + selectQuery.query);
+        }
+        
+        System.out.println("Language population report queries finished...");
 
         System.out.println(countryReportList.stream().count() + " country reports collected...");
         System.out.println(cityReportList.stream().count() + " city reports collected...");
         System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
         System.out.println(populationReportList.stream().count() + " population reports collected...");
+        
+		System.out.println(languageReportList.stream().count() + " language reports collected...");
 
         System.out.println("Generating Country CSV reports...");
         CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
@@ -130,7 +153,9 @@ public class App
         CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
         System.out.println("Generating Population CSV reports...");
         CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
-
+       
+	    System.out.println("Generating Language CSV reports...");
+        CSVHelper.WriteReportListToCSV(languageReportList, "language_reports");
         // Disconnect from database
         app.disconnect(conn);
         conn = null;
