@@ -11,11 +11,11 @@ public class PopulationReportRowMapper {
 
     public static List<PopulationReportRow> GeneratePopulationReportFromResultSet(ResultSet rs) throws SQLException {
         List<PopulationReportRow> objectList = new ArrayList<PopulationReportRow>();
-
+        
         while(rs.next()) {
 
             try
-            {
+            {	
                 PopulationReportRow populationReportRow = new PopulationReportRow();
 
                 populationReportRow.name = rs.getString("Name");
