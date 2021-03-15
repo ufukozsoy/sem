@@ -43,15 +43,15 @@ public class CSVHelper {
                     for (CountryReportRow countryReportRow : (List<CountryReportRow>)report.rows) {
                         csvWriter.append(countryReportRow.name);
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.code);
+                        csvWriter.append(countryReportRow.ISO3code);
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.continent.label);
+                        csvWriter.append(countryReportRow.continent);
                         csvWriter.append(",");
                         csvWriter.append(countryReportRow.region);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", countryReportRow.population));
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.capital);
+                        csvWriter.append(countryReportRow.headofstate);
                         csvWriter.append("\n");
                     }
                     break;

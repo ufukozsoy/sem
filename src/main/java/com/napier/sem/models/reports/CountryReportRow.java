@@ -4,9 +4,9 @@ import com.napier.sem.models.raw_data.Continent;
 
 public class CountryReportRow {
     public String name;
-    public String code;
-    public Continent continent;
+    public String ISO3code;
+    public String continent;
     public String region;
     public int population;
-    public String capital;
+    public String headofstate;
 }
