@@ -82,7 +82,7 @@ public class CountryReportRowMapper {
         return ISO3Code;
     }
 
-  
+
     public String getName () {
         return name;
     }
