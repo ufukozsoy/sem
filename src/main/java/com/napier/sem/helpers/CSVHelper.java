@@ -99,13 +99,13 @@ public class CSVHelper {
                 case Language:
                 	for (LanguageReportRow languageReportRow : (List<LanguageReportRow>)report.rows) {
 
-                        System.out.println("Writing row to CSV: " + languageReportRow.language);
+                        System.out.println("Writing row to CSV: " + languageReportRow.languageName);
 						                       
-                        csvWriter.append(languageReportRow.language);
+                        csvWriter.append(languageReportRow.languageName);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", languageReportRow.speakers));
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%.2f", languageReportRow.percentage_of_world_population));
+                        csvWriter.append(String.format("%.2f", languageReportRow.percentage));
                         csvWriter.append("\n");
             }
                 	break;
