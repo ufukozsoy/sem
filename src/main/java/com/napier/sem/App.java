@@ -63,8 +63,8 @@ public class App
         System.out.println(cityReportList.stream().count() + " city reports collected...");
         System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
         System.out.println(populationReportList.stream().count() + " population reports collected...");
-        
-		System.out.println(languageReportList.stream().count() + " language reports collected...");
+
+        System.out.println(languageReportList.stream().count() + " language reports collected...");
 
         System.out.println("Generating Country CSV reports...");
         CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
@@ -74,8 +74,8 @@ public class App
         CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
         System.out.println("Generating Population CSV reports...");
         CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
-       
-	    System.out.println("Generating Language CSV reports...");
+
+        System.out.println("Generating Language CSV reports...");
         CSVHelper.WriteReportListToCSV(languageReportList, "language_reports");
         // Disconnect from database
         app.disconnect(conn);
