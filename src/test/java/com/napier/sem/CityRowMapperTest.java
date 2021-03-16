@@ -11,7 +11,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class CityTest {
+class CityRowMapperTest {
     @Test
     void getId() {
 

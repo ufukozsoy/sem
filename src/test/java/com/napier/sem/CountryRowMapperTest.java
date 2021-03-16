@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class CountryTest {
+class CountryRowMapperTest {
     @Test
     void getISO3Code() {
 

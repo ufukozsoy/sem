@@ -11,11 +11,11 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class CapitalCityTest {
+class CapitalCityRowMapperTest {
     @Test
     void getId() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1,"Kabul", "ABW", "Kabol", 1780000);
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
 
         assertEquals(1, city.getId());
@@ -24,7 +24,7 @@ class CapitalCityTest {
     @Test
     void getName() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1,"Kabul", "ABW", "Kabol", 1780000);
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
 
         assertEquals("Kabul", city.getName());
@@ -33,7 +33,7 @@ class CapitalCityTest {
     @Test
     void getPopulation() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1,"Kabul", "ABW", "Kabol", 1780000);
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
 
         assertEquals(1780000, city.getPopulation());
@@ -42,7 +42,7 @@ class CapitalCityTest {
     @Test
     void getCountry_code() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1,"Kabul", "ABW", "Kabol", 1780000);
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
 
         assertEquals("ABW", city.getCountry_code());
@@ -51,7 +51,7 @@ class CapitalCityTest {
     @Test
     void getDistrict() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1,"Kabul", "ABW", "Kabol", 1780000);
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
 
         assertEquals("Kabol", city.getDistrict());
@@ -60,7 +60,7 @@ class CapitalCityTest {
     @Test
     void toStringTest() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1,"Kabul", "ABW", "Kabol", 1780000);
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
 
         assertEquals("City{" +

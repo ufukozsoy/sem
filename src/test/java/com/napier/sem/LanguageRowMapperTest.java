@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class LanguageTest {
+class LanguageRowMapperTest {
 
     @Test
     void getCountryCode() {
