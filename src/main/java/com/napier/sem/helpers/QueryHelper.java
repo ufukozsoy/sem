@@ -15,24 +15,24 @@ public class QueryHelper {
     public QueryHelper()
     {
         CountryReports = new ArrayList<Query>(Arrays.asList(
-                new Query("SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id ORDER BY population DESC;",
+                new Query("SELECT CO.name,CO.ISO3code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id ORDER BY population DESC;",
                         "All the countries in the world organised by largest population to smallest."),
 
-                new Query("SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.continent = 'Europe' ORDER BY population DESC;",
+                new Query("SELECT CO.name,CO.ISO3code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.continent = 'Europe' ORDER BY population DESC;",
                         "All the countries in a continent organised by largest population to smallest."),
 
-                new Query("SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.region = 'Eastern Europe' ORDER BY population DESC;",
+                new Query("SELECT CO.name,CO.ISO3code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.region = 'Eastern Europe' ORDER BY population DESC;",
                         "All the countries in a region organised by largest population to smallest."),
 
                 // --- --- ---
 
-                new Query("SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id ORDER BY population DESC LIMIT 5;",
+                new Query("SELECT CO.name,CO.ISO3code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id ORDER BY population DESC LIMIT 5;",
                         "The top N populated countries in the world where N is provided by the user."),
 
-                new Query("SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.continent = 'Europe' ORDER BY population DESC LIMIT 5;",
+                new Query("SELECT CO.name,CO.ISO3code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.continent = 'Europe' ORDER BY population DESC LIMIT 5;",
                         "The top N populated countries in a continent where N is provided by the user."),
 
-                new Query("SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.region = 'Eastern Europe' ORDER BY population DESC LIMIT 5;",
+                new Query("SELECT CO.name,CO.ISO3code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id WHERE CO.region = 'Eastern Europe' ORDER BY population DESC LIMIT 5;",
                         "The top N populated countries in a region where N is provided by the user.")
         ));
 

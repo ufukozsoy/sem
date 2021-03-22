@@ -43,15 +43,15 @@ public class CSVHelper {
                     for (CountryReportRow countryReportRow : (List<CountryReportRow>)report.rows) {
                         csvWriter.append(countryReportRow.name);
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.code);
+                        csvWriter.append(countryReportRow.ISO3code);
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.continent.label);
+                        csvWriter.append(countryReportRow.continent);
                         csvWriter.append(",");
                         csvWriter.append(countryReportRow.region);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", countryReportRow.population));
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.capital);
+                        csvWriter.append(countryReportRow.headofstate);
                         csvWriter.append("\n");
                     }
                     break;
@@ -99,13 +99,13 @@ public class CSVHelper {
                 case Language:
                 	for (LanguageReportRow languageReportRow : (List<LanguageReportRow>)report.rows) {
 
-                        System.out.println("Writing row to CSV: " + languageReportRow.language);
+                        System.out.println("Writing row to CSV: " + languageReportRow.languageName);
 						                       
-                        csvWriter.append(languageReportRow.language);
+                        csvWriter.append(languageReportRow.languageName);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", languageReportRow.speakers));
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%.2f", languageReportRow.percentage_of_world_population));
+                        csvWriter.append(String.format("%.2f", languageReportRow.percentage));
                         csvWriter.append("\n");
             }
                 	break;
@@ -121,4 +121,7 @@ public class CSVHelper {
             System.out.println("Failed to write report to CSV");
         }
     }
-}
+
+
+    }
+
