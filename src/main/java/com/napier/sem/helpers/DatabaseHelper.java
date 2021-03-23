@@ -60,6 +60,9 @@ public class DatabaseHelper {
                     case Language:
                         reportRowList = LanguageReportRowMapper.GenerateLanguageReportFromResultSet(queryResult);
                         break;
+                    case TotalPopulation:
+                        reportRowList = TotalPopulationReportRowMapper.GenerateTotalPopulationReportFromResultSet(queryResult);
+                        break;
                 }
                 generatedReports.add(new Report(selectQuery.title, reportRowList, queryHeaders, reportType));
             }

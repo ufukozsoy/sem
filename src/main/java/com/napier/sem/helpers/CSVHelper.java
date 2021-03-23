@@ -16,12 +16,10 @@ public class CSVHelper {
         }
     }
 
-    public static void WriteReportToCSV(Report report, String outputFolderName)
-    {
-        try
-        {
-            String directoryPath = "/tmp/output_reports/" + outputFolderName;
-            String filePath = directoryPath + "/" + report.getSlug() + ".csv";
+	public static void WriteReportToCSV(Report report, String outputFolderName) {
+		try {
+			String directoryPath = "/tmp/output_reports/" + outputFolderName;
+			String filePath = directoryPath + "/" + report.getSlug() + ".csv";
 
             File directory = new File(directoryPath);
             if (! directory.exists()){
@@ -36,9 +34,8 @@ public class CSVHelper {
             csvWriter.append(String.join(",", report.columns));
             csvWriter.append("\n");
 
-            switch (report.reportType)
-            {
-                case Country:
+			switch (report.reportType) {
+			case Country:
 
                     for (CountryReportRow countryReportRow : (List<CountryReportRow>)report.rows) {
                         csvWriter.append(countryReportRow.name);
@@ -100,28 +97,34 @@ public class CSVHelper {
                 	for (LanguageReportRow languageReportRow : (List<LanguageReportRow>)report.rows) {
 
                         System.out.println("Writing row to CSV: " + languageReportRow.languageName);
-						                       
+
                         csvWriter.append(languageReportRow.languageName);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", languageReportRow.speakers));
                         csvWriter.append(",");
                         csvWriter.append(String.format("%.2f", languageReportRow.percentage));
                         csvWriter.append("\n");
-            }
-                	break;
-                    
-            }
+                    }
+                    break;
 
-            csvWriter.flush();
-            csvWriter.close();
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to write report to CSV");
-        }
-    }
+                case TotalPopulation:
+                    for (TotalPopulationReportRow totalPopulationReportRow : (List<TotalPopulationReportRow>) report.rows) {
 
+                        System.out.println("Writing row to CSV: " + totalPopulationReportRow.name);
 
-    }
+                        csvWriter.append(totalPopulationReportRow.name);
+                        csvWriter.append(",");
+                        csvWriter.append(String.format("%d", totalPopulationReportRow.population));
+                        csvWriter.append("\n");
+                    }
+				    break;
+			}
 
+			csvWriter.flush();
+			csvWriter.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("Failed to write report to CSV");
+		}
+	}
+}

@@ -5,5 +5,6 @@ public enum ReportType {
     City,
     CapitalCity,
     Population,
-    Language  //code by viva
+    Language,
+    TotalPopulation
 }
