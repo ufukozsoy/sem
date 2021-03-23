@@ -96,28 +96,28 @@ public class CSVHelper {
                 case Language:
                 	for (LanguageReportRow languageReportRow : (List<LanguageReportRow>)report.rows) {
 
-					System.out.println("Writing row to CSV: " + languageReportRow.languageName);
+                        System.out.println("Writing row to CSV: " + languageReportRow.languageName);
 
-					csvWriter.append(languageReportRow.languageName);
-					csvWriter.append(",");
-					csvWriter.append(String.format("%d", languageReportRow.speakers));
-					csvWriter.append(",");
-					csvWriter.append(String.format("%.2f", languageReportRow.percentage));
-					csvWriter.append("\n");
-				}
-				break;
-			case TotalPopulation:
-				for (TotalPopulationReportRow totalPopulationReportRow : (List<TotalPopulationReportRow>) report.rows) {
+                        csvWriter.append(languageReportRow.languageName);
+                        csvWriter.append(",");
+                        csvWriter.append(String.format("%d", languageReportRow.speakers));
+                        csvWriter.append(",");
+                        csvWriter.append(String.format("%.2f", languageReportRow.percentage));
+                        csvWriter.append("\n");
+                    }
+                    break;
 
-					System.out.println("Writing row to CSV: " + totalPopulationReportRow.name);
+                case TotalPopulation:
+                    for (TotalPopulationReportRow totalPopulationReportRow : (List<TotalPopulationReportRow>) report.rows) {
 
-					csvWriter.append(totalPopulationReportRow.name);
-					csvWriter.append(",");
-					csvWriter.append(String.format("%d", totalPopulationReportRow.population));
-					csvWriter.append("\n");
-				}
-				break;
+                        System.out.println("Writing row to CSV: " + totalPopulationReportRow.name);
 
+                        csvWriter.append(totalPopulationReportRow.name);
+                        csvWriter.append(",");
+                        csvWriter.append(String.format("%d", totalPopulationReportRow.population));
+                        csvWriter.append("\n");
+                    }
+				    break;
 			}
 
 			csvWriter.flush();

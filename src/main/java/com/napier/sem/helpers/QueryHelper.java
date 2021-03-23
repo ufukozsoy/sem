@@ -127,6 +127,7 @@ public class QueryHelper {
 						+ "WHERE cl.Language IN ('Chinese','English','Hindi','Spanish','Arabic')\n"
 						+ "GROUP BY cl.Language\n" + "ORDER BY speakers desc;\n" + "",
 				"The number of people who speak the specified languages from greatest number to smallest, including the percentage of the world population")));
+		
 		TotalLanguageReports = new ArrayList<Query>(Arrays.asList(
 				new Query("SELECT 'World' AS Name,SUM(Population) AS total_pop FROM country;",
 						"The population of the world"),
