@@ -15,22 +15,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App
-{
-    public static void main(String[] args)
-    {
-        System.out.println("Application started... (build#: (" + getCurrentTimeStamp() + ")");
+public class App {
+	public static void main(String[] args) {
+		System.out.println("Application started... (build#: (" + getCurrentTimeStamp() + ")");
 
         // Create new Application
         App app = new App();
         // Connect to coursework 'world' database
         Connection conn = app.connect("world");
 
-        List<Report> countryReportList = new ArrayList<Report>();
-        List<Report> cityReportList = new ArrayList<Report>();
-        List<Report> capitalCityReportList = new ArrayList<Report>();
-        List<Report> populationReportList = new ArrayList<Report>();
-        List<Report> languageReportList = new ArrayList<Report>(); //code by viva
+		List<Report> countryReportList = new ArrayList<Report>();
+		List<Report> cityReportList = new ArrayList<Report>();
+		List<Report> capitalCityReportList = new ArrayList<Report>();
+		List<Report> populationReportList = new ArrayList<Report>();
+		List<Report> languageReportList = new ArrayList<Report>();
+		List<Report> totalPopulationReportList = new ArrayList<Report>();
 
         QueryHelper queryHelper = new QueryHelper();
 
@@ -55,15 +54,26 @@ public class App
         System.out.println("Population report queries finished...");
 
         // Generate Language reports --- --- ---
-        System.out.println("Language population report queries...");
+        System.out.println("Loading language population report queries...");
         languageReportList = DatabaseHelper.GenerateReportsForQueryArray(conn, queryHelper.LanguageReports, ReportType.Language);
         System.out.println("Language population report queries finished...");
 
+        // Generate Total population reports --- --- ---
+        System.out.println("Loading total population report queries...");
+        totalPopulationReportList = DatabaseHelper.GenerateReportsForQueryArray(conn, queryHelper.TotalLanguageReports, ReportType.TotalPopulation);
+		System.out.println("Total population report queries finished...");
+
+		System.out.println(countryReportList.stream().count() + " country reports collected...");
+		System.out.println(cityReportList.stream().count() + " city reports collected...");
+		System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
+		System.out.println(populationReportList.stream().count() + " population reports collected...");
+		System.out.println(languageReportList.stream().count() + " language reports collected...");
+		System.out.println(totalPopulationReportList.stream().count() + " total population reports collected...");
+        
         System.out.println(countryReportList.stream().count() + " country reports collected...");
         System.out.println(cityReportList.stream().count() + " city reports collected...");
         System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
         System.out.println(populationReportList.stream().count() + " population reports collected...");
-
         System.out.println(languageReportList.stream().count() + " language reports collected...");
 
         System.out.println("Generating Country CSV reports...");
@@ -74,9 +84,10 @@ public class App
         CSVHelper.WriteReportListToCSV(capitalCityReportList, "capital_city_reports");
         System.out.println("Generating Population CSV reports...");
         CSVHelper.WriteReportListToCSV(populationReportList, "population_reports");
-
         System.out.println("Generating Language CSV reports...");
         CSVHelper.WriteReportListToCSV(languageReportList, "language_reports");
+        System.out.println("Generating Total Population CSV reports...");
+        CSVHelper.WriteReportListToCSV(totalPopulationReportList, "total_population_reports");
         // Disconnect from database
         app.disconnect(conn);
         conn = null;
