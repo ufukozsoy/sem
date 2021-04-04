@@ -3,6 +3,7 @@ package com.napier.sem;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.models.raw_data.Query;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -26,8 +27,8 @@ public class AppTest {
 
         CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
-
     }
+
 
     @Test
     void getName() {
@@ -277,6 +278,39 @@ public class AppTest {
 
 
     }
+    @Test
+    void getCountriesTestNull()
+    {
+        app.connect(null);
+    }
+
+    @Test
+    void getCountriesTestEmpty()
+    {
+        ArrayList<Query> countries = new ArrayList<>();
+        app.connect(null);
+    }
 
 
+
+    @Test
+    void getCitiesNull()
+    {
+        app.connect(null);
+    }
+
+
+    /**
+     * Method tests the displayCities method
+     * by using a city list with no entries
+     */
+    @Test
+    void getCitiesEmptyList()
+    {
+        ArrayList<Query> countries = new ArrayList<>();
+        app.connect(null);
+    }
+    
 }
+
+
