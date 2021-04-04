@@ -95,7 +95,6 @@ public class AppIntegrationTest {
     }
 
 
-
     @Test
     void getContinent() {
 
@@ -253,6 +252,7 @@ public class AppIntegrationTest {
 
         assertEquals("AW", country.getISO2Code());
     }
+
     @Test
     void getCountryCode() {
 
@@ -268,7 +268,8 @@ public class AppIntegrationTest {
         LanguageReportRowMapper language = new LanguageReportRowMapper("ABW", "Dutch", "T", 5.3);
 
 
-        assertEquals("ABW", language.getCountryCode());}
+        assertEquals("ABW", language.getCountryCode());
+    }
 
     @Test
     void isOfficial() {
@@ -287,46 +288,11 @@ public class AppIntegrationTest {
 
         assertEquals("ABW", language.getCountryCode());
     }
+
     @Test
     void WriteReportListToCSV() {
 
         QueryHelper queryHelper = new QueryHelper();
     }
-        @Test
-        void countryReportList() {
 
-            QueryHelper queryHelper = new QueryHelper();
-
-        }
-    @Test
-    void cityReportList() {
-
-        QueryHelper queryHelper = new QueryHelper();
-
-    }
-    @Test
-    void capitalCityReportList() {
-
-        QueryHelper queryHelper = new QueryHelper();
-
-    }
-    @Test
-    void populationReportList() {
-
-        QueryHelper queryHelper = new QueryHelper();
-
-    }
-    @Test
-    void languageReportList() {
-
-        QueryHelper queryHelper = new QueryHelper();
-
-    }
-    @Test
-    void totalPopulationReportList() {
-
-        QueryHelper queryHelper = new QueryHelper();
-
-
-    }
 }
