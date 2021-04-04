@@ -291,5 +291,42 @@ public class AppIntegrationTest {
     void WriteReportListToCSV() {
 
         QueryHelper queryHelper = new QueryHelper();
+    }
+        @Test
+        void countryReportList() {
 
-}}
+            QueryHelper queryHelper = new QueryHelper();
+
+        }
+    @Test
+    void cityReportList() {
+
+        QueryHelper queryHelper = new QueryHelper();
+
+    }
+    @Test
+    void capitalCityReportList() {
+
+        QueryHelper queryHelper = new QueryHelper();
+
+    }
+    @Test
+    void populationReportList() {
+
+        QueryHelper queryHelper = new QueryHelper();
+
+    }
+    @Test
+    void languageReportList() {
+
+        QueryHelper queryHelper = new QueryHelper();
+
+    }
+    @Test
+    void totalPopulationReportList() {
+
+        QueryHelper queryHelper = new QueryHelper();
+
+
+    }
+}
