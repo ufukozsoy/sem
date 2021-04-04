@@ -278,39 +278,6 @@ public class AppTest {
 
 
     }
-    @Test
-    void getCountriesTestNull()
-    {
-        app.connect(null);
-    }
-
-    @Test
-    void getCountriesTestEmpty()
-    {
-        ArrayList<Query> countries = new ArrayList<>();
-        app.connect(null);
-    }
-
-
-
-    @Test
-    void getCitiesNull()
-    {
-        app.connect(null);
-    }
-
-
-    /**
-     * Method tests the displayCities method
-     * by using a city list with no entries
-     */
-    @Test
-    void getCitiesEmptyList()
-    {
-        ArrayList<Query> countries = new ArrayList<>();
-        app.connect(null);
-    }
-    
 }
 
 
