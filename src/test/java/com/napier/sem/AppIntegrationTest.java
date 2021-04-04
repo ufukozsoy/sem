@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
@@ -286,6 +287,9 @@ public class AppIntegrationTest {
 
         assertEquals("ABW", language.getCountryCode());
     }
+    @Test
+    void WriteReportListToCSV() {
 
+        QueryHelper queryHelper = new QueryHelper();
 
-}
+}}
