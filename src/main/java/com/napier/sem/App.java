@@ -16,20 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-	public static void main(String[] args) {
-		System.out.println("Application started... (build#: (" + getCurrentTimeStamp() + ")");
+    public static void main(String[] args) {
+        System.out.println("Application started... (build#: (" + getCurrentTimeStamp() + ")");
 
         // Create new Application
         App app = new App();
         // Connect to coursework 'world' database
-        Connection conn = app.connect("world");
+        Connection conn = app.connect("localhost:3306"  );
 
-		List<Report> countryReportList = new ArrayList<Report>();
-		List<Report> cityReportList = new ArrayList<Report>();
-		List<Report> capitalCityReportList = new ArrayList<Report>();
-		List<Report> populationReportList = new ArrayList<Report>();
-		List<Report> languageReportList = new ArrayList<Report>();
-		List<Report> totalPopulationReportList = new ArrayList<Report>();
+        List<Report> countryReportList = new ArrayList<Report>();
+        List<Report> cityReportList = new ArrayList<Report>();
+        List<Report> capitalCityReportList = new ArrayList<Report>();
+        List<Report> populationReportList = new ArrayList<Report>();
+        List<Report> languageReportList = new ArrayList<Report>();
+        List<Report> totalPopulationReportList = new ArrayList<Report>();
 
         QueryHelper queryHelper = new QueryHelper();
 
@@ -61,15 +61,15 @@ public class App {
         // Generate Total population reports --- --- ---
         System.out.println("Loading total population report queries...");
         totalPopulationReportList = DatabaseHelper.GenerateReportsForQueryArray(conn, queryHelper.TotalLanguageReports, ReportType.TotalPopulation);
-		System.out.println("Total population report queries finished...");
+        System.out.println("Total population report queries finished...");
 
-		System.out.println(countryReportList.stream().count() + " country reports collected...");
-		System.out.println(cityReportList.stream().count() + " city reports collected...");
-		System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
-		System.out.println(populationReportList.stream().count() + " population reports collected...");
-		System.out.println(languageReportList.stream().count() + " language reports collected...");
-		System.out.println(totalPopulationReportList.stream().count() + " total population reports collected...");
-        
+        System.out.println(countryReportList.stream().count() + " country reports collected...");
+        System.out.println(cityReportList.stream().count() + " city reports collected...");
+        System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
+        System.out.println(populationReportList.stream().count() + " population reports collected...");
+        System.out.println(languageReportList.stream().count() + " language reports collected...");
+        System.out.println(totalPopulationReportList.stream().count() + " total population reports collected...");
+
         System.out.println(countryReportList.stream().count() + " country reports collected...");
         System.out.println(cityReportList.stream().count() + " city reports collected...");
         System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
@@ -98,7 +98,7 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public static Connection connect(String databaseName)
+    public static Connection connect(String location)
     {
         Connection con = null;
 
@@ -122,7 +122,7 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/" + databaseName + "?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/" + location + "?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
