@@ -1,10 +1,18 @@
 package com.napier.sem;
 
+import com.napier.sem.helpers.CSVHelper;
+import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.models.raw_data.Continent;
+import com.napier.sem.models.raw_data.Country;
+import com.napier.sem.models.reports.CountryReportRow;
+import com.napier.sem.models.reports.PopulationReportRow;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
 
@@ -271,7 +279,83 @@ public class AppTest {
 
 
     }
+    @Test
+    void WriteReportListToCSV() {
 
+        QueryHelper queryHelper = new QueryHelper();
+    }
+
+    @Test
+    void GenerateLanguageFromResultSet() {
+        LanguageReportRowMapper language = new LanguageReportRowMapper("ABW", "Dutch", "T", 5.3);
+
+
+        assertEquals("ABW", language.getCountryCode());
+    }
+
+    @Test
+    void GenerateCountryReportRowsFromResultSet() {
+        CountryReportRowMapper country = new CountryReportRowMapper("ABW", "Aruba",
+                "North America", "Caribbean",
+                193.00, 1900, 103000,
+                78.4, 828.00, 793.00,
+                "Aruba", "Nonmetropolitan Territory of The Netherlands",
+                "Beatrix", 129, "AW");
+
+        assertEquals("AW", country.getISO2Code());
+    }
+
+    @Test
+    void GenerateCityFromResultSet() {
+
+        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
+
+
+        assertEquals("City{" +
+                "id=1" +
+                ", name='Kabul" + '\'' +
+                ", country_code='ABW" + '\'' +
+                ", district='Kabol" + '\'' +
+                ", population=1780000" +
+                '}', city.toString());
+    }
+
+    @Test
+    void CountryReports() {
+
+        CountryReportRow country = new CountryReportRow();
+
+    }
+
+
+    @Test
+    void Population() {
+
+        PopulationReportRow populationReportRow = new PopulationReportRow();
+    }
+
+    @Test
+    void CSVHelper() {
+
+        CSVHelper CSVHelper = new CSVHelper();
+
+    }
+    @Test
+    void GenerateCountryFromResultSet() {
+        Country country = new Country();
+
+        country.code = app.toString();
+        country.name = app.toString();;
+        country.continent = Continent.fromString(app.toString());
+        country.region = app.toString();
+        country.localname = app.toString();
+        country.governmentform = app.toString();
+        country.headofstate = app.toString();
+
+        country.code2 = app.toString();
+
+
+    }
 
 }
 
