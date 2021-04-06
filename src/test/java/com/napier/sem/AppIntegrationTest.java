@@ -297,22 +297,23 @@ public class AppIntegrationTest {
 
     @Test
     void GenerateLanguageFromResultSet() {
-    LanguageReportRowMapper language = new LanguageReportRowMapper("ABW", "Dutch", "T", 5.3);
+        LanguageReportRowMapper language = new LanguageReportRowMapper("ABW", "Dutch", "T", 5.3);
 
 
-    assertEquals("ABW", language.getCountryCode());}
+        assertEquals("ABW", language.getCountryCode());
+    }
 
-        @Test
-        void GenerateCountryReportRowsFromResultSet() {
-            CountryReportRowMapper country = new CountryReportRowMapper("ABW", "Aruba",
-                    "North America", "Caribbean",
-                    193.00, 1900, 103000,
-                    78.4, 828.00, 793.00,
-                    "Aruba", "Nonmetropolitan Territory of The Netherlands",
-                    "Beatrix", 129, "AW");
+    @Test
+    void GenerateCountryReportRowsFromResultSet() {
+        CountryReportRowMapper country = new CountryReportRowMapper("ABW", "Aruba",
+                "North America", "Caribbean",
+                193.00, 1900, 103000,
+                78.4, 828.00, 793.00,
+                "Aruba", "Nonmetropolitan Territory of The Netherlands",
+                "Beatrix", 129, "AW");
 
-            assertEquals("AW", country.getISO2Code());
-        }
+        assertEquals("AW", country.getISO2Code());
+    }
 
     @Test
     void GenerateCityFromResultSet() {
@@ -338,13 +339,15 @@ public class AppIntegrationTest {
 
 
     @Test
-    void Population(){
+    void Population() {
 
-    PopulationReportRow populationReportRow = new PopulationReportRow();
-}
+        PopulationReportRow populationReportRow = new PopulationReportRow();
+    }
+
     @Test
-    void CSVHelper(){
+    void CSVHelper() {
 
         CSVHelper CSVHelper = new CSVHelper();
 
+    }
 }
