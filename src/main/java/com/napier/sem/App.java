@@ -22,7 +22,17 @@ public class App {
         // Create new Application
         App app = new App();
         // Connect to coursework 'world' database
-        Connection conn = app.connect("localhost:33060");
+        Connection conn = null;
+
+        // Connect to database
+        if (args.length < 1)
+        {
+            conn = app.connect("localhost:3306");
+        }
+        else
+        {
+            conn = app.connect(args[0]);
+        }
 
         List<Report> countryReportList = new ArrayList<Report>();
         List<Report> cityReportList = new ArrayList<Report>();
@@ -122,6 +132,9 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
+
+                String connectionString = "jdbc:mysql://db:3306/" + location + "?useSSL=false";
+                System.out.println("Using connection string: " + connectionString);
 
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
