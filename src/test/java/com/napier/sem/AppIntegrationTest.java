@@ -5,6 +5,7 @@ import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
 import com.napier.sem.models.reports.CountryReportRow;
 import com.napier.sem.models.reports.PopulationReportRow;
@@ -354,4 +355,17 @@ public class AppIntegrationTest {
     @Test
     void GenerateCountryFromResultSet() {
     Country country = new Country();
-}}
+
+        country.code = app.toString();
+        country.name = app.toString();;
+        country.continent = Continent.fromString(app.toString());
+        country.region = app.toString();
+        country.localname = app.toString();
+        country.governmentform = app.toString();
+        country.headofstate = app.toString();
+
+        country.code2 = app.toString();
+
+
+    }
+}
