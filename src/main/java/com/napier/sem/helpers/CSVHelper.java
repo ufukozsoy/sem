@@ -40,7 +40,7 @@ public class CSVHelper {
                     for (CountryReportRow countryReportRow : (List<CountryReportRow>)report.rows) {
                         csvWriter.append(countryReportRow.name);
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.ISO3code);
+                        csvWriter.append(countryReportRow.code);
                         csvWriter.append(",");
                         csvWriter.append(countryReportRow.continent);
                         csvWriter.append(",");
@@ -48,7 +48,7 @@ public class CSVHelper {
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", countryReportRow.population));
                         csvWriter.append(",");
-                        csvWriter.append(countryReportRow.headofstate);
+                        csvWriter.append(countryReportRow.capital);
                         csvWriter.append("\n");
                     }
                     break;
@@ -96,13 +96,13 @@ public class CSVHelper {
                 case Language:
                 	for (LanguageReportRow languageReportRow : (List<LanguageReportRow>)report.rows) {
 
-                        System.out.println("Writing row to CSV: " + languageReportRow.languageName);
+                        System.out.println("Writing row to CSV: " + languageReportRow.language);
 
-                        csvWriter.append(languageReportRow.languageName);
+                        csvWriter.append(languageReportRow.language);
                         csvWriter.append(",");
                         csvWriter.append(String.format("%d", languageReportRow.speakers));
                         csvWriter.append(",");
-                        csvWriter.append(String.format("%.2f", languageReportRow.percentage));
+                        csvWriter.append(String.format("%.2f", languageReportRow.percentage_of_world_population));
                         csvWriter.append("\n");
                     }
                     break;

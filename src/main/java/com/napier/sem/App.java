@@ -80,12 +80,6 @@ public class App {
         System.out.println(languageReportList.stream().count() + " language reports collected...");
         System.out.println(totalPopulationReportList.stream().count() + " total population reports collected...");
 
-        System.out.println(countryReportList.stream().count() + " country reports collected...");
-        System.out.println(cityReportList.stream().count() + " city reports collected...");
-        System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
-        System.out.println(populationReportList.stream().count() + " population reports collected...");
-        System.out.println(languageReportList.stream().count() + " language reports collected...");
-
         System.out.println("Generating Country CSV reports...");
         CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
         System.out.println("Generating City CSV reports...");
