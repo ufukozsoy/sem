@@ -323,4 +323,17 @@ public class AppIntegrationTest {
                 '}', city.toString());
     }
 
+    @Test
+    void CountryReports() {
+
+        CountryReportRowMapper country = new CountryReportRowMapper("ABW", "Aruba",
+                "North America", "Caribbean",
+                193.00, 1900, 103000,
+                78.4, 828.00, 793.00,
+                "Aruba", "Nonmetropolitan Territory of The Netherlands",
+                "Beatrix", 129, "AW");
+
+        assertEquals("AW", country.getISO2Code());
+    }
+
 }
