@@ -8,6 +8,7 @@ import com.napier.sem.mappers.reports.LanguageReportRowMapper;
 import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
+import com.napier.sem.models.raw_data.CountryLanguage;
 import com.napier.sem.models.reports.CountryReportRow;
 import com.napier.sem.models.reports.PopulationReportRow;
 import org.junit.jupiter.api.*;
@@ -300,10 +301,14 @@ public class AppIntegrationTest {
 
     @Test
     void GenerateLanguageFromResultSet() {
-        LanguageReportRowMapper language = new LanguageReportRowMapper("ABW", "Dutch", "T", 5.3);
+
+        CountryLanguage countryLanguage = new CountryLanguage();
+
+        countryLanguage.countrycode = app.toString();
+        countryLanguage.language = app.toString();
 
 
-        assertEquals("ABW", language.getCountryCode());
+        
     }
 
     @Test
@@ -326,7 +331,7 @@ public class AppIntegrationTest {
         city.name = app.toString();
         city.countrycode = app.toString();
         city.district = app.toString();
-        
+
 
 
 
