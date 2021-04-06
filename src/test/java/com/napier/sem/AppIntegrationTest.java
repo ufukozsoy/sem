@@ -307,8 +307,6 @@ public class AppIntegrationTest {
         countryLanguage.countrycode = app.toString();
         countryLanguage.language = app.toString();
 
-
-        
     }
 
     @Test
@@ -323,27 +321,11 @@ public class AppIntegrationTest {
         assertEquals("AW", country.getISO2Code());
     }
 
-    @Test
-    void GenerateCityFromResultSet() {
-
-        City city = new City();
-
-        city.name = app.toString();
-        city.countrycode = app.toString();
-        city.district = app.toString();
 
 
 
 
 
-        assertEquals("City{" +
-                "id=1" +
-                ", name='Kabul" + '\'' +
-                ", country_code='ABW" + '\'' +
-                ", district='Kabol" + '\'' +
-                ", population=1780000" +
-                '}', city.toString());
-    }
 
     @Test
     void CountryReports() {
