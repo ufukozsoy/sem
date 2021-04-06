@@ -330,4 +330,10 @@ public class AppIntegrationTest {
         CountryReportRow country = new CountryReportRow();
 
     }
+    @Test
+    void GenerateReportsForQueryArray() {
+
+        QueryHelper queryHelper = new QueryHelper();
+    }
+
 }
