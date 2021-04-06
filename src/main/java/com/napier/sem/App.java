@@ -22,7 +22,17 @@ public class App {
         // Create new Application
         App app = new App();
         // Connect to coursework 'world' database
-        Connection conn = app.connect("localhost:3306"  );
+        Connection conn = null;
+
+        // Connect to database
+        if (args.length < 1)
+        {
+            conn = app.connect("localhost:3306");
+        }
+        else
+        {
+            conn = app.connect(args[0]);
+        }
 
         List<Report> countryReportList = new ArrayList<Report>();
         List<Report> cityReportList = new ArrayList<Report>();
@@ -70,12 +80,6 @@ public class App {
         System.out.println(languageReportList.stream().count() + " language reports collected...");
         System.out.println(totalPopulationReportList.stream().count() + " total population reports collected...");
 
-        System.out.println(countryReportList.stream().count() + " country reports collected...");
-        System.out.println(cityReportList.stream().count() + " city reports collected...");
-        System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
-        System.out.println(populationReportList.stream().count() + " population reports collected...");
-        System.out.println(languageReportList.stream().count() + " language reports collected...");
-
         System.out.println("Generating Country CSV reports...");
         CSVHelper.WriteReportListToCSV(countryReportList, "country_reports");
         System.out.println("Generating City CSV reports...");
@@ -122,7 +126,11 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/" + location + "?useSSL=false", "root", "example");
+
+                String connectionString = "jdbc:mysql://db:3306/" + location + "?useSSL=false";
+                System.out.println("Using connection string: " + connectionString);
+
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }

@@ -20,11 +20,11 @@ public class CountryReportRowMapper {
                 CountryReportRow countryReportRow = new CountryReportRow();
 
                 countryReportRow.name = rs.getString("Name");
-                countryReportRow.ISO3code = rs.getString("ISO3Code");
+                countryReportRow.code = rs.getString("code");
                 countryReportRow.continent = rs.getString("continent");
                 countryReportRow.region = rs.getString("Region");
                 countryReportRow.population = rs.getInt("Population");
-                countryReportRow.headofstate = rs.getString("headOfstate");
+                countryReportRow.capital = rs.getString("capital");
 
                 objectList.add(countryReportRow);
             }

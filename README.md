@@ -38,17 +38,14 @@ The requirements were fulfilled in the form of generated CSV reports.
 | 23  | The population of people, people living in cities, and people not living in cities in each continent.   | Yes | [Image](/screenshots/23.jpg) |
 | 24  | The population of people, people living in cities, and people not living in cities in each region.      | Yes | [Image](/screenshots/24.jpg) |
 | 25  | The population of people, people living in cities, and people not living in cities in each country.     | Yes | [Image](/screenshots/25.jpg) |
-
 | 26  | The population of the world.                                                                            | Yes | [Image](/screenshots/26.jpg) |
 | 27  | The population of a continent.                                                                          | Yes | [Image](/screenshots/27.jpg) |
 | 28  | The population of a region.                                                                             | Yes | [Image](/screenshots/28.jpg) |
 | 29  | The population of a country.                                                                            | Yes | [Image](/screenshots/29.jpg) |
 | 30  | The population of a district.                                                                           | Yes | [Image](/screenshots/30.jpg) |
 | 31  | The population of a city.                                                                               | Yes | [Image](/screenshots/31.jpg) |
-
 | 32  | Number of people who speak Chinese.                                                                     | Yes | [Image](/screenshots/32.jpg) |
 | 33  | Number of people who speak English.                                                                     | Yes | [Image](/screenshots/33.jpg) |
 | 34  | Number of people who speak Hindi.                                                                       | Yes | [Image](/screenshots/34.jpg) |
 | 35  | Number of people who speak Spanish.                                                                     | Yes | [Image](/screenshots/35.jpg) |
 | 36  | Number of people who speak Arabic.                                                                      | Yes | [Image](/screenshots/36.jpg) |
->>>>>>> 9ed7265aee60407acb746027b6345c1359b887d4
