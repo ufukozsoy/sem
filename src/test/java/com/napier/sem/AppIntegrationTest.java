@@ -4,6 +4,7 @@ import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.models.reports.CountryReportRow;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -326,14 +327,7 @@ public class AppIntegrationTest {
     @Test
     void CountryReports() {
 
-        CountryReportRowMapper country = new CountryReportRowMapper("ABW", "Aruba",
-                "North America", "Caribbean",
-                193.00, 1900, 103000,
-                78.4, 828.00, 793.00,
-                "Aruba", "Nonmetropolitan Territory of The Netherlands",
-                "Beatrix", 129, "AW");
+        CountryReportRow country = new CountryReportRow();
 
-        assertEquals("AW", country.getISO2Code());
     }
-
 }
