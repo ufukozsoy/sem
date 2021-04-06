@@ -5,7 +5,11 @@ import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
 import com.napier.sem.models.reports.CountryReportRow;
+import com.napier.sem.models.reports.PopulationReportRow;
 import org.junit.jupiter.api.*;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AppIntegrationTest {
@@ -330,10 +334,10 @@ public class AppIntegrationTest {
         CountryReportRow country = new CountryReportRow();
 
     }
+
+
     @Test
-    void GenerateReportsForQueryArray() {
+    void Population(){
 
-        QueryHelper queryHelper = new QueryHelper();
-    }
-
-}
+    PopulationReportRow populationReportRow = new PopulationReportRow();
+}}
