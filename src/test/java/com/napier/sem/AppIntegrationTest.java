@@ -5,6 +5,7 @@ import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.models.raw_data.Country;
 import com.napier.sem.models.reports.CountryReportRow;
 import com.napier.sem.models.reports.PopulationReportRow;
 import org.junit.jupiter.api.*;
@@ -350,4 +351,7 @@ public class AppIntegrationTest {
         CSVHelper CSVHelper = new CSVHelper();
 
     }
-}
+    @Test
+    void CountryMapper() {
+    Country country = new Country();
+}}
