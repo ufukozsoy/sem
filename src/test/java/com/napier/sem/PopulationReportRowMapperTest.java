@@ -1,10 +1,6 @@
 package com.napier.sem;
 
-import com.napier.sem.helpers.CSVHelper;
-import com.napier.sem.mappers.raw_data.CityMapper;
-import com.napier.sem.models.reports.CityReportRow;
 import com.napier.sem.mappers.reports.PopulationReportRowMapper;
-import com.napier.sem.mappers.reports.CapitalCityReportRowMapper;
 
 import org.junit.jupiter.api.*;
 

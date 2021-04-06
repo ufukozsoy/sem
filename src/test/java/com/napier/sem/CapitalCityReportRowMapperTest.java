@@ -1,7 +1,6 @@
 package com.napier.sem;
 
 import com.napier.sem.mappers.reports.CapitalCityReportRowMapper;
-import com.napier.sem.mappers.reports.CityReportRowMapper;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
