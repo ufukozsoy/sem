@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import com.napier.sem.helpers.CSVHelper;
 import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
@@ -340,4 +341,10 @@ public class AppIntegrationTest {
     void Population(){
 
     PopulationReportRow populationReportRow = new PopulationReportRow();
-}}
+}
+    @Test
+    void CSVHelper(){
+
+        CSVHelper CSVHelper = new CSVHelper();
+
+}
