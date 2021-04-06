@@ -5,6 +5,7 @@ import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
 import com.napier.sem.models.reports.CountryReportRow;
@@ -320,7 +321,14 @@ public class AppIntegrationTest {
     @Test
     void GenerateCityFromResultSet() {
 
-        CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
+        City city = new City();
+
+        city.name = app.toString();
+        city.countrycode = app.toString();
+        city.district = app.toString();
+        
+
+
 
 
         assertEquals("City{" +
@@ -368,4 +376,5 @@ public class AppIntegrationTest {
 
 
     }
+
 }
