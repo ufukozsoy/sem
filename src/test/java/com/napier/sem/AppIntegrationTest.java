@@ -352,6 +352,6 @@ public class AppIntegrationTest {
 
     }
     @Test
-    void CountryMapper() {
+    void GenerateCountryFromResultSet() {
     Country country = new Country();
 }}
