@@ -5,6 +5,7 @@ import com.napier.sem.helpers.QueryHelper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.mappers.reports.QueryHeaderMapper;
 import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
@@ -363,5 +364,7 @@ public class AppIntegrationTest {
 
 
     }
-
-}
+    @Test
+    void GenerateHeadersFromResultSet () {
+        QueryHeaderMapper QueryHeaderMapper = new QueryHeaderMapper();
+}}
