@@ -98,14 +98,12 @@ public class CountryReportRowMapper {
     }
 
     /**
-
      */
     public double getSurfaceArea () {
         return surfaceArea;
     }
 
     /**
-
      */
     public int getIndependenceYear () {
         return independenceYear;
