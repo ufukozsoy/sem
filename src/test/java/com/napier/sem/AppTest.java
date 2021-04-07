@@ -22,10 +22,14 @@ public class AppTest {
 
     static App app;
 
+    static String location = "localhost:33060";
+
     @BeforeAll
     static void init() {
         app = new App();
+        app.connect(location);
     }
+
 
     @Test
     void getId() {
