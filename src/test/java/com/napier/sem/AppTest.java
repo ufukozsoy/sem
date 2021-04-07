@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import com.napier.sem.helpers.CSVHelper;
 import com.napier.sem.helpers.QueryHelper;
+import com.napier.sem.mappers.reports.TotalPopulationReportRowMapper;
 import com.napier.sem.mappers.reports.CityReportRowMapper;
 import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
@@ -351,7 +352,10 @@ public class AppTest {
 
 
     }
+    @Test
+    void TotalPopulationReportRowMapper() {
+        TotalPopulationReportRowMapper TotalPopulationReportRowMapper = new TotalPopulationReportRowMapper();
 
-}
+}}
 
 
