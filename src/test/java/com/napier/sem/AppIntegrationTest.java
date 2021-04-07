@@ -10,8 +10,7 @@ import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
 import com.napier.sem.models.raw_data.CountryLanguage;
-import com.napier.sem.models.reports.CountryReportRow;
-import com.napier.sem.models.reports.PopulationReportRow;
+import com.napier.sem.models.reports.*;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -22,10 +21,14 @@ public class AppIntegrationTest {
 
     static App app;
 
+    static String location = "localhost:33060";
+
     @BeforeAll
     static void init() {
         app = new App();
+        app.connect(location);
     }
+
 
     @Test
     void getId() {
@@ -367,4 +370,6 @@ public class AppIntegrationTest {
     @Test
     void GenerateHeadersFromResultSet () {
         QueryHeaderMapper QueryHeaderMapper = new QueryHeaderMapper();
-}}
+}
+
+}
