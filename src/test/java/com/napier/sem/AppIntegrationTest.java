@@ -13,6 +13,7 @@ import com.napier.sem.models.raw_data.CountryLanguage;
 import com.napier.sem.models.reports.*;
 import org.junit.jupiter.api.*;
 
+import java.io.File;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ public class AppIntegrationTest {
 
     static App app;
 
-    static String location = "localhost:33060";
+	static String location = "localhost:3306";
 
     @BeforeAll
     static void init() {
@@ -371,5 +372,34 @@ public class AppIntegrationTest {
     void GenerateHeadersFromResultSet () {
         QueryHeaderMapper QueryHeaderMapper = new QueryHeaderMapper();
 }
+
+	@Test
+	public void testReportFoldersExists() {
+		try {
+			String[] arg = {};
+			app.main(arg);
+			String dirPath = "/tmp/output_reports/";
+			String countryOutputFolder = dirPath + "country_reports";
+			String capitalCityOutputFolder = dirPath + "capital_city_reports";
+			String cityOutputFolder = dirPath + "city_reports";
+			String populationOutputFolder = dirPath + "population_reports";
+			String languageOutputFolder = dirPath + "language_reports";
+			String totalPopOutputFolder = dirPath + "total_population_reports";
+			File countryDir = new File(countryOutputFolder);
+			File capitalDir = new File(capitalCityOutputFolder);
+			File cityDir = new File(cityOutputFolder);
+			File populationDir = new File(populationOutputFolder);
+			File languageDir = new File(languageOutputFolder);
+			File totalPopDir = new File(totalPopOutputFolder);
+			assertEquals(true, countryDir.exists());
+			assertEquals(true, capitalDir.exists());
+			assertEquals(true, cityDir.exists());
+			assertEquals(true, populationDir.exists());
+			assertEquals(true, languageDir.exists());
+			assertEquals(true, totalPopDir.exists());
+		} catch (Exception e) {
+			assertNull(e);
+		}
+	}
 
 }
