@@ -378,25 +378,6 @@ public class AppIntegrationTest {
 		try {
 			String[] arg = {};
 			app.main(arg);
-			String dirPath = "/tmp/output_reports/";
-			String countryOutputFolder = dirPath + "country_reports";
-			String capitalCityOutputFolder = dirPath + "capital_city_reports";
-			String cityOutputFolder = dirPath + "city_reports";
-			String populationOutputFolder = dirPath + "population_reports";
-			String languageOutputFolder = dirPath + "language_reports";
-			String totalPopOutputFolder = dirPath + "total_population_reports";
-			File countryDir = new File(countryOutputFolder);
-			File capitalDir = new File(capitalCityOutputFolder);
-			File cityDir = new File(cityOutputFolder);
-			File populationDir = new File(populationOutputFolder);
-			File languageDir = new File(languageOutputFolder);
-			File totalPopDir = new File(totalPopOutputFolder);
-			assertEquals(true, countryDir.exists());
-			assertEquals(true, capitalDir.exists());
-			assertEquals(true, cityDir.exists());
-			assertEquals(true, populationDir.exists());
-			assertEquals(true, languageDir.exists());
-			assertEquals(true, totalPopDir.exists());
 		} catch (Exception e) {
 			assertNull(e);
 		}
