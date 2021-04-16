@@ -13,6 +13,7 @@ import com.napier.sem.models.raw_data.CountryLanguage;
 import com.napier.sem.models.reports.*;
 import org.junit.jupiter.api.*;
 
+import java.io.File;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ public class AppIntegrationTest {
 
     static App app;
 
-    static String location = "localhost:33060";
+	static String location = "localhost:3306";
 
     @BeforeAll
     static void init() {
@@ -371,5 +372,15 @@ public class AppIntegrationTest {
     void GenerateHeadersFromResultSet () {
         QueryHeaderMapper QueryHeaderMapper = new QueryHeaderMapper();
 }
+
+	@Test
+	public void testReportFoldersExists() {
+		try {
+			String[] arg = {};
+			app.main(arg);
+		} catch (Exception e) {
+			assertNull(e);
+		}
+	}
 
 }

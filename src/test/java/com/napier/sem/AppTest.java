@@ -8,6 +8,8 @@ import com.napier.sem.mappers.reports.CountryReportRowMapper;
 import com.napier.sem.mappers.reports.LanguageReportRowMapper;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
+import com.napier.sem.models.raw_data.CountryLanguage;
+import com.napier.sem.models.enums.ReportType;
 import com.napier.sem.models.raw_data.City;
 import com.napier.sem.models.reports.CountryReportRow;
 import com.napier.sem.models.reports.PopulationReportRow;
@@ -15,14 +17,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class AppTest {
 
     static App app;
 
-    static String location = "localhost:33060";
+	static String location = "localhost:3306";
 
     @BeforeAll
     static void init() {
@@ -30,9 +36,104 @@ public class AppTest {
         app.connect(location);
     }
 
+	@Test
+	void testDisconnectConnection() {
+		try {
+			app.disconnect(app.connect(location));
+		} catch (Exception e) {
+			assertNull(e);
+		}
+	}
 
-    @Test
-    void getId() {
+	@Test
+	void testCurrentTimeStampInApp() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		assertEquals(date.format(new java.util.Date()), app.getCurrentTimeStamp());
+	}
+
+	@Test
+	void testCountryInEnum() {
+		assertEquals("Country", ReportType.values()[0].toString());
+	}
+
+	@Test
+	void testCityInEnum() {
+		assertEquals("City", ReportType.values()[1].toString());
+	}
+
+	@Test
+	void testCapitalCityInEnum() {
+		assertEquals("CapitalCity", ReportType.values()[2].toString());
+	}
+
+	@Test
+	void testPopulationInEnum() {
+		assertEquals("Population", ReportType.values()[3].toString());
+	}
+
+	@Test
+	void testLanguageInEnum() {
+		assertEquals("Language", ReportType.values()[4].toString());
+	}
+
+	@Test
+	void testTotalPopulationInEnum() {
+		assertEquals("TotalPopulation", ReportType.values()[5].toString());
+	}
+
+	@Test
+	void testCountryLanguageObjectIsNotNull() {
+		CountryLanguage cl = new CountryLanguage();
+		assertNull(cl.countrycode);
+	}
+
+	@Test
+	void testAsiaInContinentEnumFromString() {
+		assertEquals("Asia", Continent.fromString("Asia").toString());
+	}
+
+	@Test
+	void testEuropeInContinentEnumFromString() {
+		assertEquals("Europe", Continent.fromString("Europe").toString());
+	}
+
+	@Test
+	void testNAInContinentEnumFromString() {
+		assertEquals("North_America", Continent.fromString("North America").toString());
+	}
+
+	@Test
+	void testAfricaInContinentEnumFromString() {
+		assertEquals("Africa", Continent.fromString("Africa").toString());
+	}
+
+	@Test
+	void testOceaniaInContinentEnumFromString() {
+		assertEquals("Oceania", Continent.fromString("Oceania").toString());
+	}
+
+	@Test
+	void testAntInContinentEnumFromString() {
+		assertEquals("Antarctica", Continent.fromString("Antarctica").toString());
+	}
+
+	@Test
+	void testSAInContinentEnumFromString() {
+		assertEquals("South_America", Continent.fromString("South America").toString());
+	}
+
+	@Test
+	public void testMainMethodForExceptions() {
+		try {
+			String[] arg = {};
+			app.main(arg);
+		} catch (Exception e) {
+			assertNull(e);
+		}
+	}
+
+	@Test
+	void getId() {
 
         CityReportRowMapper city = new CityReportRowMapper(1, "Kabul", "ABW", "Kabol", 1780000);
 
