@@ -11,8 +11,13 @@ import com.napier.sem.models.raw_data.Country;
 import com.napier.sem.models.raw_data.CountryLanguage;
 import com.napier.sem.models.enums.ReportType;
 import com.napier.sem.models.raw_data.City;
+import com.napier.sem.models.reports.CapitalCityReportRow;
+import com.napier.sem.models.reports.CityReportRow;
 import com.napier.sem.models.reports.CountryReportRow;
+import com.napier.sem.models.reports.LanguageReportRow;
 import com.napier.sem.models.reports.PopulationReportRow;
+import com.napier.sem.models.reports.TotalPopulationReportRow;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +90,30 @@ public class AppTest {
 	void testCountryLanguageObjectIsNotNull() {
 		CountryLanguage cl = new CountryLanguage();
 		assertNull(cl.countrycode);
+	}
+	
+	@Test
+	void testCapitalCityReportRowObjectIsNotNull() {
+		CapitalCityReportRow cl = new CapitalCityReportRow();
+		assertNull(cl.country);
+	}
+	
+	@Test
+	void testCityReportRowObjectIsNotNull() {
+		CityReportRow cl = new CityReportRow();
+		assertNull(cl.country);
+	}
+	
+	@Test
+	void testLanguageReportRowObjectIsNotNull() {
+		LanguageReportRow cl = new LanguageReportRow();
+		assertNull(cl.countryCode);
+	}
+	
+	@Test
+	void testTotalPopulationReportRowRowObjectIsNotNull() {
+		TotalPopulationReportRow cl = new TotalPopulationReportRow();
+		assertNull(cl.name);
 	}
 
 	@Test
