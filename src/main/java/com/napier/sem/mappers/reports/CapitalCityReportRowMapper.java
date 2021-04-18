@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CapitalCityReportRowMapper {
 
+    //Maps a ResultSet object onto a CapitalCityReportRow object
     public static List<CapitalCityReportRow> GenerateCapitalCityFromResultSet(ResultSet rs) throws SQLException {
         List<CapitalCityReportRow> objectList = new ArrayList<CapitalCityReportRow>();
 

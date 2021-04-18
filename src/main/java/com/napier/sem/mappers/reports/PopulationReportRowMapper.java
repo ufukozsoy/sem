@@ -9,6 +9,7 @@ import java.util.List;
 
 public class PopulationReportRowMapper {
 
+    //Maps a ResultSet object onto a PopulationReportRow object
     public static List<PopulationReportRow> GeneratePopulationReportFromResultSet(ResultSet rs) throws SQLException {
         List<PopulationReportRow> objectList = new ArrayList<PopulationReportRow>();
         

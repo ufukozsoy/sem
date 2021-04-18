@@ -13,6 +13,7 @@ public class QueryHelper {
 	public static List<Query> LanguageReports;
 	public static List<Query> TotalLanguageReports;
 
+	//Holds pre-defined SQL queries that can be run to retried data for Report generation
 	public QueryHelper() {
 		CountryReports = new ArrayList<Query>(Arrays.asList(new Query(
 				"SELECT CO.name,CO.code,CO.continent,CO.region,CO.population,CI.name as capital FROM country CO LEFT JOIN city CI ON CO.capital = CI.id ORDER BY population DESC;",

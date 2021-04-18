@@ -1,5 +1,6 @@
 package com.napier.sem.models.reports;
 
+//Represents information about a language
 public class LanguageReportRow {
 	public String language;
 	public long speakers;

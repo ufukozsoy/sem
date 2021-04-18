@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CountryReportRowMapper {
 
+    //Maps a ResultSet object onto a CountryReportRow object
     public static List<CountryReportRow> GenerateCountryReportRowsFromResultSet(ResultSet rs) throws SQLException {
         List<CountryReportRow> objectList = new ArrayList<CountryReportRow>();
 

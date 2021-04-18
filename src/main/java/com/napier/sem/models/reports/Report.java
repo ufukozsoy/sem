@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+//Generic report object holding a list of rows that can be cast into different report row objects
 public class Report {
     public String title;
     public List rows;

@@ -9,6 +9,8 @@ import com.napier.sem.models.reports.PopulationReportRow;
 import com.napier.sem.models.reports.TotalPopulationReportRow;
 
 public class TotalPopulationReportRowMapper {
+
+	//Maps a ResultSet object onto a TotalPopulationReportRow object
 	public static List<TotalPopulationReportRow> GenerateTotalPopulationReportFromResultSet(ResultSet rs)
 			throws SQLException {
 		List<TotalPopulationReportRow> objectList = new ArrayList<TotalPopulationReportRow>();

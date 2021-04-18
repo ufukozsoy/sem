@@ -1,7 +1,6 @@
 package com.napier.sem.models.reports;
 
-import com.napier.sem.models.raw_data.Continent;
-
+//Represents information about a country
 public class CountryReportRow {
     public String name;
     public String code;

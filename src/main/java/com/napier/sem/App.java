@@ -34,6 +34,7 @@ public class App {
             conn = app.connect(args[0]);
         }
 
+        // Create arrays to hold reports that will be generated for each report category
         List<Report> countryReportList = new ArrayList<Report>();
         List<Report> cityReportList = new ArrayList<Report>();
         List<Report> capitalCityReportList = new ArrayList<Report>();
@@ -41,6 +42,7 @@ public class App {
         List<Report> languageReportList = new ArrayList<Report>();
         List<Report> totalPopulationReportList = new ArrayList<Report>();
 
+        //Create query helper to access pre-defined SQL queries
         QueryHelper queryHelper = new QueryHelper();
 
         // Generate Country reports --- --- ---
@@ -73,6 +75,7 @@ public class App {
         totalPopulationReportList = DatabaseHelper.GenerateReportsForQueryArray(conn, queryHelper.TotalLanguageReports, ReportType.TotalPopulation);
         System.out.println("Total population report queries finished...");
 
+        //Print statistics to console regarding reports generated
         System.out.println(countryReportList.stream().count() + " country reports collected...");
         System.out.println(cityReportList.stream().count() + " city reports collected...");
         System.out.println(capitalCityReportList.stream().count() + " capital city reports collected...");
@@ -166,6 +169,7 @@ public class App {
         }
     }
 
+    //Gets the current typestamp
     public static String getCurrentTimeStamp() {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
         java.util.Date now = new java.util.Date();

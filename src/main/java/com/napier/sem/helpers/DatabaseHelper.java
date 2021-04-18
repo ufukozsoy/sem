@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper {
+
+    //Run an SQL select query on the connection provided and return the ResultSet
     public static ResultSet RunSelectQuery(Connection con, String queryString)
     {
         ResultSet rset = null;
@@ -31,6 +33,8 @@ public class DatabaseHelper {
         return rset;
     }
 
+    //Takes a DB connection object, a list of queries and a pre-defined query type
+    //Executes each query and generates Report objects for each query ran
     public static List<Report> GenerateReportsForQueryArray(Connection conn, List<Query> queryArray, ReportType reportType) {
 
         List<Report> generatedReports = new ArrayList<Report>();

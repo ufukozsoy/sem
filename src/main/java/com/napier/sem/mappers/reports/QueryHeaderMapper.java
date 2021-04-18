@@ -9,6 +9,7 @@ import java.util.List;
 
 public class QueryHeaderMapper {
 
+    //Maps a ResultSet object into a string representing a header row for a generated CSV
     public static List<String> GenerateHeadersFromResultSet(ResultSet rs) throws SQLException {
         List<String> objectList = new ArrayList<String>();
 

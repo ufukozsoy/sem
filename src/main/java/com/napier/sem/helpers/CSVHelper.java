@@ -10,13 +10,15 @@ import java.util.List;
 
 public class CSVHelper {
 
+    //Generated a CSV out of a list of reports
     public static void WriteReportListToCSV(List<Report> reportList, String outputFolderName) {
         for (Report report : reportList) {
             WriteReportToCSV(report, outputFolderName);
         }
     }
 
-	public static void WriteReportToCSV(Report report, String outputFolderName) {
+    //Writes a report into a CSV file
+    public static void WriteReportToCSV(Report report, String outputFolderName) {
 		try {
 			String directoryPath = "/tmp/output_reports/" + outputFolderName;
 			String filePath = directoryPath + "/" + report.getSlug() + ".csv";

@@ -10,7 +10,7 @@ import com.napier.sem.models.reports.LanguageReportRow;
 
 public class LanguageReportRowMapper {
 
-
+    //Maps a ResultSet object onto a LanguageReportRow object
     public static List<LanguageReportRow> GenerateLanguageReportFromResultSet(ResultSet rs) throws SQLException {
         List<LanguageReportRow> objectList = new ArrayList<LanguageReportRow>();
 
