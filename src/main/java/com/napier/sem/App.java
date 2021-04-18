@@ -117,20 +117,20 @@ public class App {
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 20;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(20000);
                 // Connect to database
 
-                String connectionString = "jdbc:mysql://db:3306/" + location + "?useSSL=false";
+                String connectionString = "jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false";
                 System.out.println("Using connection string: " + connectionString);
 
-                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection(connectionString, "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
