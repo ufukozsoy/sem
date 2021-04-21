@@ -2,10 +2,7 @@ package com.napier.sem;
 
 import com.napier.sem.helpers.CSVHelper;
 import com.napier.sem.helpers.QueryHelper;
-import com.napier.sem.mappers.reports.TotalPopulationReportRowMapper;
-import com.napier.sem.mappers.reports.CityReportRowMapper;
-import com.napier.sem.mappers.reports.CountryReportRowMapper;
-import com.napier.sem.mappers.reports.LanguageReportRowMapper;
+import com.napier.sem.mappers.reports.*;
 import com.napier.sem.models.raw_data.Continent;
 import com.napier.sem.models.raw_data.Country;
 import com.napier.sem.models.raw_data.CountryLanguage;
@@ -455,6 +452,21 @@ public class AppTest {
 
         CountryReportRow country = new CountryReportRow();
 
+    }
+
+    @Test
+    void GenerateHeadersFromResultSet () {
+        QueryHeaderMapper QueryHeaderMapper = new QueryHeaderMapper();
+    }
+
+    @Test
+    public void testReportFoldersExists() {
+        try {
+            String[] arg = {};
+            app.main(arg);
+        } catch (Exception e) {
+            assertNull(e);
+        }
     }
 
 
