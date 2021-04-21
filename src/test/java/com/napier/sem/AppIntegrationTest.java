@@ -299,11 +299,15 @@ public class AppIntegrationTest {
     }
 
     @Test
-    void WriteReportListToCSV() {
+    void CountryReport() {
 
         QueryHelper queryHelper = new QueryHelper();
     }
+    @Test
+    void WriteReportListToCSV() {
 
+        CSVHelper CSVHelper = new CSVHelper();
+    }
     @Test
     void GenerateLanguageFromResultSet() {
 
