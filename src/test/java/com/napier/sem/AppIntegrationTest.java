@@ -48,6 +48,50 @@ public class AppIntegrationTest {
 
         assertEquals("Kabul", city.getName());
     }
+    @Test
+    void testAsiaInContinentEnumFromString() {
+        assertEquals("Asia", Continent.fromString("Asia").toString());
+    }
+
+    @Test
+    void testEuropeInContinentEnumFromString() {
+        assertEquals("Europe", Continent.fromString("Europe").toString());
+    }
+
+    @Test
+    void testNAInContinentEnumFromString() {
+        assertEquals("North_America", Continent.fromString("North America").toString());
+    }
+
+    @Test
+    void testAfricaInContinentEnumFromString() {
+        assertEquals("Africa", Continent.fromString("Africa").toString());
+    }
+
+    @Test
+    void testOceaniaInContinentEnumFromString() {
+        assertEquals("Oceania", Continent.fromString("Oceania").toString());
+    }
+
+    @Test
+    void testAntInContinentEnumFromString() {
+        assertEquals("Antarctica", Continent.fromString("Antarctica").toString());
+    }
+
+    @Test
+    void testSAInContinentEnumFromString() {
+        assertEquals("South_America", Continent.fromString("South America").toString());
+    }
+
+    @Test
+    public void testMainMethodForExceptions() {
+        try {
+            String[] arg = {};
+            app.main(arg);
+        } catch (Exception e) {
+            assertNull(e);
+        }
+    }
 
     @Test
     void getPopulation() {

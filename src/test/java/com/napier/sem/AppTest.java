@@ -501,7 +501,8 @@ public class AppTest {
     @Test
     void TotalPopulationReportRowMapper() {
         TotalPopulationReportRowMapper TotalPopulationReportRowMapper = new TotalPopulationReportRowMapper();
+    }
 
-}}
+}
 
 
